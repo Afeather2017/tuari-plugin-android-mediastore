@@ -1,6 +1,6 @@
 <script>
   import Greet from './lib/Greet.svelte'
-  import { ping, getAudioFiles, checkPermissions, requestPermissions } from 'tauri-plugin-android-mediastore-api'
+  import { ping, getAudioFiles } from 'tauri-plugin-android-mediastore-api'
 
 	let response = $state('')
 
@@ -14,19 +14,6 @@
 
 	async function _getAudioFiles() {
 		try {
-			// Check permissions first
-			const perms = await checkPermissions()
-			const needsRequest = (perms.audio?.startsWith('prompt') || perms.storage?.startsWith('prompt'))
-
-			if (needsRequest) {
-				updateResponse('Requesting permissions...')
-				const requested = await requestPermissions(['audio', 'storage'])
-				if (requested.audio !== 'granted' && requested.storage !== 'granted') {
-					updateResponse('Permission denied. Please grant audio access in settings.')
-					return
-				}
-			}
-
 			const result = await getAudioFiles()
 			updateResponse(`Found ${result.files.length} audio files`)
 			result.files.slice(0, 5).forEach(file => {

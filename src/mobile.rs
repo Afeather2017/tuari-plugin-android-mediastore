@@ -27,7 +27,7 @@ pub struct AndroidMediastore<R: Runtime>(PluginHandle<R>);
 
 impl<R: Runtime> AndroidMediastore<R> {
   pub fn ping(&self, payload: PingRequest) -> crate::Result<PingResponse> {
-    self.check_permissions();
+    let _ = self.check_permissions();
     self
       .0
       .run_mobile_plugin("ping", payload)
@@ -35,21 +35,21 @@ impl<R: Runtime> AndroidMediastore<R> {
   }
 
   pub fn get_audio_files(&self) -> crate::Result<AudioFilesResponse> {
+    self.check_permissions_and_request_if_needed();
     self
       .0
       .run_mobile_plugin("getAudioFiles", ())
       .map_err(Into::into)
   }
 
-  pub fn check_permissions(&self) -> crate::Result<PermissionStatus> {
-    println!("check_permissions");
+  fn check_permissions(&self) -> crate::Result<PermissionStatus> {
     self
       .0
       .run_mobile_plugin("checkPermissions", ())
       .map_err(Into::into)
   }
 
-  pub fn request_permissions(&self, permissions: Option<Vec<String>>) -> crate::Result<PermissionStatus> {
+  fn request_permissions(&self, permissions: Option<Vec<String>>) -> crate::Result<PermissionStatus> {
     self
       .0
       .run_mobile_plugin(
@@ -57,5 +57,16 @@ impl<R: Runtime> AndroidMediastore<R> {
         serde_json::json!({ "permissions": permissions }),
       )
       .map_err(Into::into)
+  }
+
+  fn check_permissions_and_request_if_needed(&self) {
+    if let Ok(perms) = self.check_permissions() {
+      let needs_request = perms.audio.as_ref().map_or(false, |a| matches!(a, PermissionState::Prompt | PermissionState::PromptWithRationale))
+        || perms.storage.as_ref().map_or(false, |s| matches!(s, PermissionState::Prompt | PermissionState::PromptWithRationale));
+
+      if needs_request {
+        let _ = self.request_permissions(Some(vec!["audio".to_string(), "storage".to_string()]));
+      }
+    }
   }
 }

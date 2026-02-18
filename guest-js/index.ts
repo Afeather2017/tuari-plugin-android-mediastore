@@ -25,17 +25,3 @@ export async function getAudioFiles(): Promise<AudioFilesResponse> {
   return await invoke<AudioFilesResponse>('plugin:android-mediastore|get_audio_files');
 }
 
-export interface PermissionStateResponse {
-  audio?: PermissionState;
-  storage?: PermissionState;
-}
-
-export async function checkPermissions(): Promise<PermissionStateResponse> {
-  return await invoke<PermissionStateResponse>('plugin:android-mediastore|checkPermissions');
-}
-
-export async function requestPermissions(permissions?: string[]): Promise<PermissionStateResponse> {
-  return await invoke<PermissionStateResponse>('plugin:android-mediastore|requestPermissions', {
-    payload: { permissions }
-  });
-}
