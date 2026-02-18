@@ -177,10 +177,16 @@
       "description": "Permission identifier",
       "oneOf": [
         {
-          "description": "Default permissions for the plugin\n#### This default permission set includes:\n\n- `allow-ping`\n- `allow-read-audio-files`",
+          "description": "Default permissions for the plugin\n#### This default permission set includes:\n\n- `allow-ping`\n- `allow-read-audio-files`\n- `allow-check-permissions`\n- `allow-request-permissions`",
           "type": "string",
           "const": "android-mediastore:default",
-          "markdownDescription": "Default permissions for the plugin\n#### This default permission set includes:\n\n- `allow-ping`\n- `allow-read-audio-files`"
+          "markdownDescription": "Default permissions for the plugin\n#### This default permission set includes:\n\n- `allow-ping`\n- `allow-read-audio-files`\n- `allow-check-permissions`\n- `allow-request-permissions`"
+        },
+        {
+          "description": "Enables the check_permissions command without any pre-configured scope.",
+          "type": "string",
+          "const": "android-mediastore:allow-check-permissions",
+          "markdownDescription": "Enables the check_permissions command without any pre-configured scope."
         },
         {
           "description": "Enables the get_audio_files command without any pre-configured scope.",
@@ -201,6 +207,18 @@
           "markdownDescription": "<h4>Allows reading audio files from the device MediaStore.</h4>Enables the get_audio_files command and requests the READ_MEDIA_AUDIO (Android 13+) or READ_EXTERNAL_STORAGE (Android 12 and below) permission."
         },
         {
+          "description": "Enables the request_permissions command without any pre-configured scope.",
+          "type": "string",
+          "const": "android-mediastore:allow-request-permissions",
+          "markdownDescription": "Enables the request_permissions command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the check_permissions command without any pre-configured scope.",
+          "type": "string",
+          "const": "android-mediastore:deny-check-permissions",
+          "markdownDescription": "Denies the check_permissions command without any pre-configured scope."
+        },
+        {
           "description": "Denies the get_audio_files command without any pre-configured scope.",
           "type": "string",
           "const": "android-mediastore:deny-get-audio-files",
@@ -217,6 +235,12 @@
           "type": "string",
           "const": "android-mediastore:deny-read-audio-files",
           "markdownDescription": "Denies reading audio files from the device MediaStore without any pre-configured scope."
+        },
+        {
+          "description": "Denies the request_permissions command without any pre-configured scope.",
+          "type": "string",
+          "const": "android-mediastore:deny-request-permissions",
+          "markdownDescription": "Denies the request_permissions command without any pre-configured scope."
         },
         {
           "description": "Default core plugins set.\n#### This default permission set includes:\n\n- `core:path:default`\n- `core:event:default`\n- `core:window:default`\n- `core:webview:default`\n- `core:app:default`\n- `core:image:default`\n- `core:resources:default`\n- `core:menu:default`\n- `core:tray:default`",

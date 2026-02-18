@@ -1,6 +1,14 @@
+
+> tauri-app@0.1.0 tauri
+> tauri permission ls
+
 android-mediastore:default
 Default permissions for the plugin
-Permissions: allow-ping, allow-read-audio-files
+Permissions: allow-ping, allow-read-audio-files, allow-check-permissions, allow-request-permissions
+
+android-mediastore:allow-check-permissions
+Enables the check_permissions command without any pre-configured scope.
+Allow commands: check_permissions
 
 android-mediastore:allow-get-audio-files
 Enables the get_audio_files command without any pre-configured scope.
@@ -14,6 +22,14 @@ android-mediastore:allow-read-audio-files
 <h4>Allows reading audio files from the device MediaStore.</h4>Enables the get_audio_files command and requests the READ_MEDIA_AUDIO (Android 13+) or READ_EXTERNAL_STORAGE (Android 12 and below) permission.
 Allow commands: get_audio_files, check_permissions, request_permissions
 
+android-mediastore:allow-request-permissions
+Enables the request_permissions command without any pre-configured scope.
+Allow commands: request_permissions
+
+android-mediastore:deny-check-permissions
+Denies the check_permissions command without any pre-configured scope.
+Deny commands: check_permissions
+
 android-mediastore:deny-get-audio-files
 Denies the get_audio_files command without any pre-configured scope.
 Deny commands: get_audio_files
@@ -25,6 +41,10 @@ Deny commands: ping
 android-mediastore:deny-read-audio-files
 Denies reading audio files from the device MediaStore without any pre-configured scope.
 Deny commands: get_audio_files, check_permissions, request_permissions
+
+android-mediastore:deny-request-permissions
+Denies the request_permissions command without any pre-configured scope.
+Deny commands: request_permissions
 
 core:default
 Default core plugins set.
