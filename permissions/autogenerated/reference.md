@@ -6,6 +6,8 @@ Default permissions for the plugin
 
 - `allow-ping`
 - `allow-read-audio-files`
+- `allow-check-permissions`
+- `allow-request-permissions`
 
 ## Permission Table
 
@@ -38,6 +40,32 @@ Default permissions for the plugin
 <td>
 
 Denies reading audio files from the device MediaStore without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:allow-check-permissions`
+
+</td>
+<td>
+
+Enables the check_permissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:deny-check-permissions`
+
+</td>
+<td>
+
+Denies the check_permissions command without any pre-configured scope.
 
 </td>
 </tr>
@@ -90,6 +118,32 @@ Enables the ping command without any pre-configured scope.
 <td>
 
 Denies the ping command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:allow-request-permissions`
+
+</td>
+<td>
+
+Enables the request_permissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:deny-request-permissions`
+
+</td>
+<td>
+
+Denies the request_permissions command without any pre-configured scope.
 
 </td>
 </tr>
