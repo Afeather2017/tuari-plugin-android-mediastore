@@ -1,0 +1,1340 @@
+android-mediastore:default
+Default permissions for the plugin
+Permissions: allow-ping, allow-read-audio-files
+
+android-mediastore:allow-get-audio-files
+Enables the get_audio_files command without any pre-configured scope.
+Allow commands: get_audio_files
+
+android-mediastore:allow-ping
+Enables the ping command without any pre-configured scope.
+Allow commands: ping
+
+android-mediastore:allow-read-audio-files
+<h4>Allows reading audio files from the device MediaStore.</h4>Enables the get_audio_files command and requests the READ_MEDIA_AUDIO (Android 13+) or READ_EXTERNAL_STORAGE (Android 12 and below) permission.
+Allow commands: get_audio_files, check_permissions, request_permissions
+
+android-mediastore:deny-get-audio-files
+Denies the get_audio_files command without any pre-configured scope.
+Deny commands: get_audio_files
+
+android-mediastore:deny-ping
+Denies the ping command without any pre-configured scope.
+Deny commands: ping
+
+android-mediastore:deny-read-audio-files
+Denies reading audio files from the device MediaStore without any pre-configured scope.
+Deny commands: get_audio_files, check_permissions, request_permissions
+
+core:default
+Default core plugins set.
+Permissions: core:path:default, core:event:default, core:window:default, core:webview:default, core:app:default, core:image:default, core:resources:default, core:menu:default, core:tray:default
+
+core:app:default
+Default permissions for the plugin.
+Permissions: allow-version, allow-name, allow-tauri-version, allow-identifier, allow-bundle-type, allow-register-listener, allow-remove-listener
+
+core:app:allow-app-hide
+Enables the app_hide command without any pre-configured scope.
+Allow commands: app_hide
+
+core:app:allow-app-show
+Enables the app_show command without any pre-configured scope.
+Allow commands: app_show
+
+core:app:allow-bundle-type
+Enables the bundle_type command without any pre-configured scope.
+Allow commands: bundle_type
+
+core:app:allow-default-window-icon
+Enables the default_window_icon command without any pre-configured scope.
+Allow commands: default_window_icon
+
+core:app:allow-fetch-data-store-identifiers
+Enables the fetch_data_store_identifiers command without any pre-configured scope.
+Allow commands: fetch_data_store_identifiers
+
+core:app:allow-identifier
+Enables the identifier command without any pre-configured scope.
+Allow commands: identifier
+
+core:app:allow-name
+Enables the name command without any pre-configured scope.
+Allow commands: name
+
+core:app:allow-register-listener
+Enables the register_listener command without any pre-configured scope.
+Allow commands: register_listener
+
+core:app:allow-remove-data-store
+Enables the remove_data_store command without any pre-configured scope.
+Allow commands: remove_data_store
+
+core:app:allow-remove-listener
+Enables the remove_listener command without any pre-configured scope.
+Allow commands: remove_listener
+
+core:app:allow-set-app-theme
+Enables the set_app_theme command without any pre-configured scope.
+Allow commands: set_app_theme
+
+core:app:allow-set-dock-visibility
+Enables the set_dock_visibility command without any pre-configured scope.
+Allow commands: set_dock_visibility
+
+core:app:allow-tauri-version
+Enables the tauri_version command without any pre-configured scope.
+Allow commands: tauri_version
+
+core:app:allow-version
+Enables the version command without any pre-configured scope.
+Allow commands: version
+
+core:app:deny-app-hide
+Denies the app_hide command without any pre-configured scope.
+Deny commands: app_hide
+
+core:app:deny-app-show
+Denies the app_show command without any pre-configured scope.
+Deny commands: app_show
+
+core:app:deny-bundle-type
+Denies the bundle_type command without any pre-configured scope.
+Deny commands: bundle_type
+
+core:app:deny-default-window-icon
+Denies the default_window_icon command without any pre-configured scope.
+Deny commands: default_window_icon
+
+core:app:deny-fetch-data-store-identifiers
+Denies the fetch_data_store_identifiers command without any pre-configured scope.
+Deny commands: fetch_data_store_identifiers
+
+core:app:deny-identifier
+Denies the identifier command without any pre-configured scope.
+Deny commands: identifier
+
+core:app:deny-name
+Denies the name command without any pre-configured scope.
+Deny commands: name
+
+core:app:deny-register-listener
+Denies the register_listener command without any pre-configured scope.
+Deny commands: register_listener
+
+core:app:deny-remove-data-store
+Denies the remove_data_store command without any pre-configured scope.
+Deny commands: remove_data_store
+
+core:app:deny-remove-listener
+Denies the remove_listener command without any pre-configured scope.
+Deny commands: remove_listener
+
+core:app:deny-set-app-theme
+Denies the set_app_theme command without any pre-configured scope.
+Deny commands: set_app_theme
+
+core:app:deny-set-dock-visibility
+Denies the set_dock_visibility command without any pre-configured scope.
+Deny commands: set_dock_visibility
+
+core:app:deny-tauri-version
+Denies the tauri_version command without any pre-configured scope.
+Deny commands: tauri_version
+
+core:app:deny-version
+Denies the version command without any pre-configured scope.
+Deny commands: version
+
+core:event:default
+Default permissions for the plugin, which enables all commands.
+Permissions: allow-listen, allow-unlisten, allow-emit, allow-emit-to
+
+core:event:allow-emit
+Enables the emit command without any pre-configured scope.
+Allow commands: emit
+
+core:event:allow-emit-to
+Enables the emit_to command without any pre-configured scope.
+Allow commands: emit_to
+
+core:event:allow-listen
+Enables the listen command without any pre-configured scope.
+Allow commands: listen
+
+core:event:allow-unlisten
+Enables the unlisten command without any pre-configured scope.
+Allow commands: unlisten
+
+core:event:deny-emit
+Denies the emit command without any pre-configured scope.
+Deny commands: emit
+
+core:event:deny-emit-to
+Denies the emit_to command without any pre-configured scope.
+Deny commands: emit_to
+
+core:event:deny-listen
+Denies the listen command without any pre-configured scope.
+Deny commands: listen
+
+core:event:deny-unlisten
+Denies the unlisten command without any pre-configured scope.
+Deny commands: unlisten
+
+core:image:default
+Default permissions for the plugin, which enables all commands.
+Permissions: allow-new, allow-from-bytes, allow-from-path, allow-rgba, allow-size
+
+core:image:allow-from-bytes
+Enables the from_bytes command without any pre-configured scope.
+Allow commands: from_bytes
+
+core:image:allow-from-path
+Enables the from_path command without any pre-configured scope.
+Allow commands: from_path
+
+core:image:allow-new
+Enables the new command without any pre-configured scope.
+Allow commands: new
+
+core:image:allow-rgba
+Enables the rgba command without any pre-configured scope.
+Allow commands: rgba
+
+core:image:allow-size
+Enables the size command without any pre-configured scope.
+Allow commands: size
+
+core:image:deny-from-bytes
+Denies the from_bytes command without any pre-configured scope.
+Deny commands: from_bytes
+
+core:image:deny-from-path
+Denies the from_path command without any pre-configured scope.
+Deny commands: from_path
+
+core:image:deny-new
+Denies the new command without any pre-configured scope.
+Deny commands: new
+
+core:image:deny-rgba
+Denies the rgba command without any pre-configured scope.
+Deny commands: rgba
+
+core:image:deny-size
+Denies the size command without any pre-configured scope.
+Deny commands: size
+
+core:menu:default
+Default permissions for the plugin, which enables all commands.
+Permissions: allow-new, allow-append, allow-prepend, allow-insert, allow-remove, allow-remove-at, allow-items, allow-get, allow-popup, allow-create-default, allow-set-as-app-menu, allow-set-as-window-menu, allow-text, allow-set-text, allow-is-enabled, allow-set-enabled, allow-set-accelerator, allow-set-as-windows-menu-for-nsapp, allow-set-as-help-menu-for-nsapp, allow-is-checked, allow-set-checked, allow-set-icon
+
+core:menu:allow-append
+Enables the append command without any pre-configured scope.
+Allow commands: append
+
+core:menu:allow-create-default
+Enables the create_default command without any pre-configured scope.
+Allow commands: create_default
+
+core:menu:allow-get
+Enables the get command without any pre-configured scope.
+Allow commands: get
+
+core:menu:allow-insert
+Enables the insert command without any pre-configured scope.
+Allow commands: insert
+
+core:menu:allow-is-checked
+Enables the is_checked command without any pre-configured scope.
+Allow commands: is_checked
+
+core:menu:allow-is-enabled
+Enables the is_enabled command without any pre-configured scope.
+Allow commands: is_enabled
+
+core:menu:allow-items
+Enables the items command without any pre-configured scope.
+Allow commands: items
+
+core:menu:allow-new
+Enables the new command without any pre-configured scope.
+Allow commands: new
+
+core:menu:allow-popup
+Enables the popup command without any pre-configured scope.
+Allow commands: popup
+
+core:menu:allow-prepend
+Enables the prepend command without any pre-configured scope.
+Allow commands: prepend
+
+core:menu:allow-remove
+Enables the remove command without any pre-configured scope.
+Allow commands: remove
+
+core:menu:allow-remove-at
+Enables the remove_at command without any pre-configured scope.
+Allow commands: remove_at
+
+core:menu:allow-set-accelerator
+Enables the set_accelerator command without any pre-configured scope.
+Allow commands: set_accelerator
+
+core:menu:allow-set-as-app-menu
+Enables the set_as_app_menu command without any pre-configured scope.
+Allow commands: set_as_app_menu
+
+core:menu:allow-set-as-help-menu-for-nsapp
+Enables the set_as_help_menu_for_nsapp command without any pre-configured scope.
+Allow commands: set_as_help_menu_for_nsapp
+
+core:menu:allow-set-as-window-menu
+Enables the set_as_window_menu command without any pre-configured scope.
+Allow commands: set_as_window_menu
+
+core:menu:allow-set-as-windows-menu-for-nsapp
+Enables the set_as_windows_menu_for_nsapp command without any pre-configured scope.
+Allow commands: set_as_windows_menu_for_nsapp
+
+core:menu:allow-set-checked
+Enables the set_checked command without any pre-configured scope.
+Allow commands: set_checked
+
+core:menu:allow-set-enabled
+Enables the set_enabled command without any pre-configured scope.
+Allow commands: set_enabled
+
+core:menu:allow-set-icon
+Enables the set_icon command without any pre-configured scope.
+Allow commands: set_icon
+
+core:menu:allow-set-text
+Enables the set_text command without any pre-configured scope.
+Allow commands: set_text
+
+core:menu:allow-text
+Enables the text command without any pre-configured scope.
+Allow commands: text
+
+core:menu:deny-append
+Denies the append command without any pre-configured scope.
+Deny commands: append
+
+core:menu:deny-create-default
+Denies the create_default command without any pre-configured scope.
+Deny commands: create_default
+
+core:menu:deny-get
+Denies the get command without any pre-configured scope.
+Deny commands: get
+
+core:menu:deny-insert
+Denies the insert command without any pre-configured scope.
+Deny commands: insert
+
+core:menu:deny-is-checked
+Denies the is_checked command without any pre-configured scope.
+Deny commands: is_checked
+
+core:menu:deny-is-enabled
+Denies the is_enabled command without any pre-configured scope.
+Deny commands: is_enabled
+
+core:menu:deny-items
+Denies the items command without any pre-configured scope.
+Deny commands: items
+
+core:menu:deny-new
+Denies the new command without any pre-configured scope.
+Deny commands: new
+
+core:menu:deny-popup
+Denies the popup command without any pre-configured scope.
+Deny commands: popup
+
+core:menu:deny-prepend
+Denies the prepend command without any pre-configured scope.
+Deny commands: prepend
+
+core:menu:deny-remove
+Denies the remove command without any pre-configured scope.
+Deny commands: remove
+
+core:menu:deny-remove-at
+Denies the remove_at command without any pre-configured scope.
+Deny commands: remove_at
+
+core:menu:deny-set-accelerator
+Denies the set_accelerator command without any pre-configured scope.
+Deny commands: set_accelerator
+
+core:menu:deny-set-as-app-menu
+Denies the set_as_app_menu command without any pre-configured scope.
+Deny commands: set_as_app_menu
+
+core:menu:deny-set-as-help-menu-for-nsapp
+Denies the set_as_help_menu_for_nsapp command without any pre-configured scope.
+Deny commands: set_as_help_menu_for_nsapp
+
+core:menu:deny-set-as-window-menu
+Denies the set_as_window_menu command without any pre-configured scope.
+Deny commands: set_as_window_menu
+
+core:menu:deny-set-as-windows-menu-for-nsapp
+Denies the set_as_windows_menu_for_nsapp command without any pre-configured scope.
+Deny commands: set_as_windows_menu_for_nsapp
+
+core:menu:deny-set-checked
+Denies the set_checked command without any pre-configured scope.
+Deny commands: set_checked
+
+core:menu:deny-set-enabled
+Denies the set_enabled command without any pre-configured scope.
+Deny commands: set_enabled
+
+core:menu:deny-set-icon
+Denies the set_icon command without any pre-configured scope.
+Deny commands: set_icon
+
+core:menu:deny-set-text
+Denies the set_text command without any pre-configured scope.
+Deny commands: set_text
+
+core:menu:deny-text
+Denies the text command without any pre-configured scope.
+Deny commands: text
+
+core:path:default
+Default permissions for the plugin, which enables all commands.
+Permissions: allow-resolve-directory, allow-resolve, allow-normalize, allow-join, allow-dirname, allow-extname, allow-basename, allow-is-absolute
+
+core:path:allow-basename
+Enables the basename command without any pre-configured scope.
+Allow commands: basename
+
+core:path:allow-dirname
+Enables the dirname command without any pre-configured scope.
+Allow commands: dirname
+
+core:path:allow-extname
+Enables the extname command without any pre-configured scope.
+Allow commands: extname
+
+core:path:allow-is-absolute
+Enables the is_absolute command without any pre-configured scope.
+Allow commands: is_absolute
+
+core:path:allow-join
+Enables the join command without any pre-configured scope.
+Allow commands: join
+
+core:path:allow-normalize
+Enables the normalize command without any pre-configured scope.
+Allow commands: normalize
+
+core:path:allow-resolve
+Enables the resolve command without any pre-configured scope.
+Allow commands: resolve
+
+core:path:allow-resolve-directory
+Enables the resolve_directory command without any pre-configured scope.
+Allow commands: resolve_directory
+
+core:path:deny-basename
+Denies the basename command without any pre-configured scope.
+Deny commands: basename
+
+core:path:deny-dirname
+Denies the dirname command without any pre-configured scope.
+Deny commands: dirname
+
+core:path:deny-extname
+Denies the extname command without any pre-configured scope.
+Deny commands: extname
+
+core:path:deny-is-absolute
+Denies the is_absolute command without any pre-configured scope.
+Deny commands: is_absolute
+
+core:path:deny-join
+Denies the join command without any pre-configured scope.
+Deny commands: join
+
+core:path:deny-normalize
+Denies the normalize command without any pre-configured scope.
+Deny commands: normalize
+
+core:path:deny-resolve
+Denies the resolve command without any pre-configured scope.
+Deny commands: resolve
+
+core:path:deny-resolve-directory
+Denies the resolve_directory command without any pre-configured scope.
+Deny commands: resolve_directory
+
+core:resources:default
+Default permissions for the plugin, which enables all commands.
+Permissions: allow-close
+
+core:resources:allow-close
+Enables the close command without any pre-configured scope.
+Allow commands: close
+
+core:resources:deny-close
+Denies the close command without any pre-configured scope.
+Deny commands: close
+
+core:tray:default
+Default permissions for the plugin, which enables all commands.
+Permissions: allow-new, allow-get-by-id, allow-remove-by-id, allow-set-icon, allow-set-menu, allow-set-tooltip, allow-set-title, allow-set-visible, allow-set-temp-dir-path, allow-set-icon-as-template, allow-set-show-menu-on-left-click
+
+core:tray:allow-get-by-id
+Enables the get_by_id command without any pre-configured scope.
+Allow commands: get_by_id
+
+core:tray:allow-new
+Enables the new command without any pre-configured scope.
+Allow commands: new
+
+core:tray:allow-remove-by-id
+Enables the remove_by_id command without any pre-configured scope.
+Allow commands: remove_by_id
+
+core:tray:allow-set-icon
+Enables the set_icon command without any pre-configured scope.
+Allow commands: set_icon
+
+core:tray:allow-set-icon-as-template
+Enables the set_icon_as_template command without any pre-configured scope.
+Allow commands: set_icon_as_template
+
+core:tray:allow-set-menu
+Enables the set_menu command without any pre-configured scope.
+Allow commands: set_menu
+
+core:tray:allow-set-show-menu-on-left-click
+Enables the set_show_menu_on_left_click command without any pre-configured scope.
+Allow commands: set_show_menu_on_left_click
+
+core:tray:allow-set-temp-dir-path
+Enables the set_temp_dir_path command without any pre-configured scope.
+Allow commands: set_temp_dir_path
+
+core:tray:allow-set-title
+Enables the set_title command without any pre-configured scope.
+Allow commands: set_title
+
+core:tray:allow-set-tooltip
+Enables the set_tooltip command without any pre-configured scope.
+Allow commands: set_tooltip
+
+core:tray:allow-set-visible
+Enables the set_visible command without any pre-configured scope.
+Allow commands: set_visible
+
+core:tray:deny-get-by-id
+Denies the get_by_id command without any pre-configured scope.
+Deny commands: get_by_id
+
+core:tray:deny-new
+Denies the new command without any pre-configured scope.
+Deny commands: new
+
+core:tray:deny-remove-by-id
+Denies the remove_by_id command without any pre-configured scope.
+Deny commands: remove_by_id
+
+core:tray:deny-set-icon
+Denies the set_icon command without any pre-configured scope.
+Deny commands: set_icon
+
+core:tray:deny-set-icon-as-template
+Denies the set_icon_as_template command without any pre-configured scope.
+Deny commands: set_icon_as_template
+
+core:tray:deny-set-menu
+Denies the set_menu command without any pre-configured scope.
+Deny commands: set_menu
+
+core:tray:deny-set-show-menu-on-left-click
+Denies the set_show_menu_on_left_click command without any pre-configured scope.
+Deny commands: set_show_menu_on_left_click
+
+core:tray:deny-set-temp-dir-path
+Denies the set_temp_dir_path command without any pre-configured scope.
+Deny commands: set_temp_dir_path
+
+core:tray:deny-set-title
+Denies the set_title command without any pre-configured scope.
+Deny commands: set_title
+
+core:tray:deny-set-tooltip
+Denies the set_tooltip command without any pre-configured scope.
+Deny commands: set_tooltip
+
+core:tray:deny-set-visible
+Denies the set_visible command without any pre-configured scope.
+Deny commands: set_visible
+
+core:webview:default
+Default permissions for the plugin.
+Permissions: allow-get-all-webviews, allow-webview-position, allow-webview-size, allow-internal-toggle-devtools
+
+core:webview:allow-clear-all-browsing-data
+Enables the clear_all_browsing_data command without any pre-configured scope.
+Allow commands: clear_all_browsing_data
+
+core:webview:allow-create-webview
+Enables the create_webview command without any pre-configured scope.
+Allow commands: create_webview
+
+core:webview:allow-create-webview-window
+Enables the create_webview_window command without any pre-configured scope.
+Allow commands: create_webview_window
+
+core:webview:allow-get-all-webviews
+Enables the get_all_webviews command without any pre-configured scope.
+Allow commands: get_all_webviews
+
+core:webview:allow-internal-toggle-devtools
+Enables the internal_toggle_devtools command without any pre-configured scope.
+Allow commands: internal_toggle_devtools
+
+core:webview:allow-print
+Enables the print command without any pre-configured scope.
+Allow commands: print
+
+core:webview:allow-reparent
+Enables the reparent command without any pre-configured scope.
+Allow commands: reparent
+
+core:webview:allow-set-webview-auto-resize
+Enables the set_webview_auto_resize command without any pre-configured scope.
+Allow commands: set_webview_auto_resize
+
+core:webview:allow-set-webview-background-color
+Enables the set_webview_background_color command without any pre-configured scope.
+Allow commands: set_webview_background_color
+
+core:webview:allow-set-webview-focus
+Enables the set_webview_focus command without any pre-configured scope.
+Allow commands: set_webview_focus
+
+core:webview:allow-set-webview-position
+Enables the set_webview_position command without any pre-configured scope.
+Allow commands: set_webview_position
+
+core:webview:allow-set-webview-size
+Enables the set_webview_size command without any pre-configured scope.
+Allow commands: set_webview_size
+
+core:webview:allow-set-webview-zoom
+Enables the set_webview_zoom command without any pre-configured scope.
+Allow commands: set_webview_zoom
+
+core:webview:allow-webview-close
+Enables the webview_close command without any pre-configured scope.
+Allow commands: webview_close
+
+core:webview:allow-webview-hide
+Enables the webview_hide command without any pre-configured scope.
+Allow commands: webview_hide
+
+core:webview:allow-webview-position
+Enables the webview_position command without any pre-configured scope.
+Allow commands: webview_position
+
+core:webview:allow-webview-show
+Enables the webview_show command without any pre-configured scope.
+Allow commands: webview_show
+
+core:webview:allow-webview-size
+Enables the webview_size command without any pre-configured scope.
+Allow commands: webview_size
+
+core:webview:deny-clear-all-browsing-data
+Denies the clear_all_browsing_data command without any pre-configured scope.
+Deny commands: clear_all_browsing_data
+
+core:webview:deny-create-webview
+Denies the create_webview command without any pre-configured scope.
+Deny commands: create_webview
+
+core:webview:deny-create-webview-window
+Denies the create_webview_window command without any pre-configured scope.
+Deny commands: create_webview_window
+
+core:webview:deny-get-all-webviews
+Denies the get_all_webviews command without any pre-configured scope.
+Deny commands: get_all_webviews
+
+core:webview:deny-internal-toggle-devtools
+Denies the internal_toggle_devtools command without any pre-configured scope.
+Deny commands: internal_toggle_devtools
+
+core:webview:deny-print
+Denies the print command without any pre-configured scope.
+Deny commands: print
+
+core:webview:deny-reparent
+Denies the reparent command without any pre-configured scope.
+Deny commands: reparent
+
+core:webview:deny-set-webview-auto-resize
+Denies the set_webview_auto_resize command without any pre-configured scope.
+Deny commands: set_webview_auto_resize
+
+core:webview:deny-set-webview-background-color
+Denies the set_webview_background_color command without any pre-configured scope.
+Deny commands: set_webview_background_color
+
+core:webview:deny-set-webview-focus
+Denies the set_webview_focus command without any pre-configured scope.
+Deny commands: set_webview_focus
+
+core:webview:deny-set-webview-position
+Denies the set_webview_position command without any pre-configured scope.
+Deny commands: set_webview_position
+
+core:webview:deny-set-webview-size
+Denies the set_webview_size command without any pre-configured scope.
+Deny commands: set_webview_size
+
+core:webview:deny-set-webview-zoom
+Denies the set_webview_zoom command without any pre-configured scope.
+Deny commands: set_webview_zoom
+
+core:webview:deny-webview-close
+Denies the webview_close command without any pre-configured scope.
+Deny commands: webview_close
+
+core:webview:deny-webview-hide
+Denies the webview_hide command without any pre-configured scope.
+Deny commands: webview_hide
+
+core:webview:deny-webview-position
+Denies the webview_position command without any pre-configured scope.
+Deny commands: webview_position
+
+core:webview:deny-webview-show
+Denies the webview_show command without any pre-configured scope.
+Deny commands: webview_show
+
+core:webview:deny-webview-size
+Denies the webview_size command without any pre-configured scope.
+Deny commands: webview_size
+
+core:window:default
+Default permissions for the plugin.
+Permissions: allow-get-all-windows, allow-scale-factor, allow-inner-position, allow-outer-position, allow-inner-size, allow-outer-size, allow-is-fullscreen, allow-is-minimized, allow-is-maximized, allow-is-focused, allow-is-decorated, allow-is-resizable, allow-is-maximizable, allow-is-minimizable, allow-is-closable, allow-is-visible, allow-is-enabled, allow-title, allow-current-monitor, allow-primary-monitor, allow-monitor-from-point, allow-available-monitors, allow-cursor-position, allow-theme, allow-is-always-on-top, allow-internal-toggle-maximize
+
+core:window:allow-available-monitors
+Enables the available_monitors command without any pre-configured scope.
+Allow commands: available_monitors
+
+core:window:allow-center
+Enables the center command without any pre-configured scope.
+Allow commands: center
+
+core:window:allow-close
+Enables the close command without any pre-configured scope.
+Allow commands: close
+
+core:window:allow-create
+Enables the create command without any pre-configured scope.
+Allow commands: create
+
+core:window:allow-current-monitor
+Enables the current_monitor command without any pre-configured scope.
+Allow commands: current_monitor
+
+core:window:allow-cursor-position
+Enables the cursor_position command without any pre-configured scope.
+Allow commands: cursor_position
+
+core:window:allow-destroy
+Enables the destroy command without any pre-configured scope.
+Allow commands: destroy
+
+core:window:allow-get-all-windows
+Enables the get_all_windows command without any pre-configured scope.
+Allow commands: get_all_windows
+
+core:window:allow-hide
+Enables the hide command without any pre-configured scope.
+Allow commands: hide
+
+core:window:allow-inner-position
+Enables the inner_position command without any pre-configured scope.
+Allow commands: inner_position
+
+core:window:allow-inner-size
+Enables the inner_size command without any pre-configured scope.
+Allow commands: inner_size
+
+core:window:allow-internal-toggle-maximize
+Enables the internal_toggle_maximize command without any pre-configured scope.
+Allow commands: internal_toggle_maximize
+
+core:window:allow-is-always-on-top
+Enables the is_always_on_top command without any pre-configured scope.
+Allow commands: is_always_on_top
+
+core:window:allow-is-closable
+Enables the is_closable command without any pre-configured scope.
+Allow commands: is_closable
+
+core:window:allow-is-decorated
+Enables the is_decorated command without any pre-configured scope.
+Allow commands: is_decorated
+
+core:window:allow-is-enabled
+Enables the is_enabled command without any pre-configured scope.
+Allow commands: is_enabled
+
+core:window:allow-is-focused
+Enables the is_focused command without any pre-configured scope.
+Allow commands: is_focused
+
+core:window:allow-is-fullscreen
+Enables the is_fullscreen command without any pre-configured scope.
+Allow commands: is_fullscreen
+
+core:window:allow-is-maximizable
+Enables the is_maximizable command without any pre-configured scope.
+Allow commands: is_maximizable
+
+core:window:allow-is-maximized
+Enables the is_maximized command without any pre-configured scope.
+Allow commands: is_maximized
+
+core:window:allow-is-minimizable
+Enables the is_minimizable command without any pre-configured scope.
+Allow commands: is_minimizable
+
+core:window:allow-is-minimized
+Enables the is_minimized command without any pre-configured scope.
+Allow commands: is_minimized
+
+core:window:allow-is-resizable
+Enables the is_resizable command without any pre-configured scope.
+Allow commands: is_resizable
+
+core:window:allow-is-visible
+Enables the is_visible command without any pre-configured scope.
+Allow commands: is_visible
+
+core:window:allow-maximize
+Enables the maximize command without any pre-configured scope.
+Allow commands: maximize
+
+core:window:allow-minimize
+Enables the minimize command without any pre-configured scope.
+Allow commands: minimize
+
+core:window:allow-monitor-from-point
+Enables the monitor_from_point command without any pre-configured scope.
+Allow commands: monitor_from_point
+
+core:window:allow-outer-position
+Enables the outer_position command without any pre-configured scope.
+Allow commands: outer_position
+
+core:window:allow-outer-size
+Enables the outer_size command without any pre-configured scope.
+Allow commands: outer_size
+
+core:window:allow-primary-monitor
+Enables the primary_monitor command without any pre-configured scope.
+Allow commands: primary_monitor
+
+core:window:allow-request-user-attention
+Enables the request_user_attention command without any pre-configured scope.
+Allow commands: request_user_attention
+
+core:window:allow-scale-factor
+Enables the scale_factor command without any pre-configured scope.
+Allow commands: scale_factor
+
+core:window:allow-set-always-on-bottom
+Enables the set_always_on_bottom command without any pre-configured scope.
+Allow commands: set_always_on_bottom
+
+core:window:allow-set-always-on-top
+Enables the set_always_on_top command without any pre-configured scope.
+Allow commands: set_always_on_top
+
+core:window:allow-set-background-color
+Enables the set_background_color command without any pre-configured scope.
+Allow commands: set_background_color
+
+core:window:allow-set-badge-count
+Enables the set_badge_count command without any pre-configured scope.
+Allow commands: set_badge_count
+
+core:window:allow-set-badge-label
+Enables the set_badge_label command without any pre-configured scope.
+Allow commands: set_badge_label
+
+core:window:allow-set-closable
+Enables the set_closable command without any pre-configured scope.
+Allow commands: set_closable
+
+core:window:allow-set-content-protected
+Enables the set_content_protected command without any pre-configured scope.
+Allow commands: set_content_protected
+
+core:window:allow-set-cursor-grab
+Enables the set_cursor_grab command without any pre-configured scope.
+Allow commands: set_cursor_grab
+
+core:window:allow-set-cursor-icon
+Enables the set_cursor_icon command without any pre-configured scope.
+Allow commands: set_cursor_icon
+
+core:window:allow-set-cursor-position
+Enables the set_cursor_position command without any pre-configured scope.
+Allow commands: set_cursor_position
+
+core:window:allow-set-cursor-visible
+Enables the set_cursor_visible command without any pre-configured scope.
+Allow commands: set_cursor_visible
+
+core:window:allow-set-decorations
+Enables the set_decorations command without any pre-configured scope.
+Allow commands: set_decorations
+
+core:window:allow-set-effects
+Enables the set_effects command without any pre-configured scope.
+Allow commands: set_effects
+
+core:window:allow-set-enabled
+Enables the set_enabled command without any pre-configured scope.
+Allow commands: set_enabled
+
+core:window:allow-set-focus
+Enables the set_focus command without any pre-configured scope.
+Allow commands: set_focus
+
+core:window:allow-set-focusable
+Enables the set_focusable command without any pre-configured scope.
+Allow commands: set_focusable
+
+core:window:allow-set-fullscreen
+Enables the set_fullscreen command without any pre-configured scope.
+Allow commands: set_fullscreen
+
+core:window:allow-set-icon
+Enables the set_icon command without any pre-configured scope.
+Allow commands: set_icon
+
+core:window:allow-set-ignore-cursor-events
+Enables the set_ignore_cursor_events command without any pre-configured scope.
+Allow commands: set_ignore_cursor_events
+
+core:window:allow-set-max-size
+Enables the set_max_size command without any pre-configured scope.
+Allow commands: set_max_size
+
+core:window:allow-set-maximizable
+Enables the set_maximizable command without any pre-configured scope.
+Allow commands: set_maximizable
+
+core:window:allow-set-min-size
+Enables the set_min_size command without any pre-configured scope.
+Allow commands: set_min_size
+
+core:window:allow-set-minimizable
+Enables the set_minimizable command without any pre-configured scope.
+Allow commands: set_minimizable
+
+core:window:allow-set-overlay-icon
+Enables the set_overlay_icon command without any pre-configured scope.
+Allow commands: set_overlay_icon
+
+core:window:allow-set-position
+Enables the set_position command without any pre-configured scope.
+Allow commands: set_position
+
+core:window:allow-set-progress-bar
+Enables the set_progress_bar command without any pre-configured scope.
+Allow commands: set_progress_bar
+
+core:window:allow-set-resizable
+Enables the set_resizable command without any pre-configured scope.
+Allow commands: set_resizable
+
+core:window:allow-set-shadow
+Enables the set_shadow command without any pre-configured scope.
+Allow commands: set_shadow
+
+core:window:allow-set-simple-fullscreen
+Enables the set_simple_fullscreen command without any pre-configured scope.
+Allow commands: set_simple_fullscreen
+
+core:window:allow-set-size
+Enables the set_size command without any pre-configured scope.
+Allow commands: set_size
+
+core:window:allow-set-size-constraints
+Enables the set_size_constraints command without any pre-configured scope.
+Allow commands: set_size_constraints
+
+core:window:allow-set-skip-taskbar
+Enables the set_skip_taskbar command without any pre-configured scope.
+Allow commands: set_skip_taskbar
+
+core:window:allow-set-theme
+Enables the set_theme command without any pre-configured scope.
+Allow commands: set_theme
+
+core:window:allow-set-title
+Enables the set_title command without any pre-configured scope.
+Allow commands: set_title
+
+core:window:allow-set-title-bar-style
+Enables the set_title_bar_style command without any pre-configured scope.
+Allow commands: set_title_bar_style
+
+core:window:allow-set-visible-on-all-workspaces
+Enables the set_visible_on_all_workspaces command without any pre-configured scope.
+Allow commands: set_visible_on_all_workspaces
+
+core:window:allow-show
+Enables the show command without any pre-configured scope.
+Allow commands: show
+
+core:window:allow-start-dragging
+Enables the start_dragging command without any pre-configured scope.
+Allow commands: start_dragging
+
+core:window:allow-start-resize-dragging
+Enables the start_resize_dragging command without any pre-configured scope.
+Allow commands: start_resize_dragging
+
+core:window:allow-theme
+Enables the theme command without any pre-configured scope.
+Allow commands: theme
+
+core:window:allow-title
+Enables the title command without any pre-configured scope.
+Allow commands: title
+
+core:window:allow-toggle-maximize
+Enables the toggle_maximize command without any pre-configured scope.
+Allow commands: toggle_maximize
+
+core:window:allow-unmaximize
+Enables the unmaximize command without any pre-configured scope.
+Allow commands: unmaximize
+
+core:window:allow-unminimize
+Enables the unminimize command without any pre-configured scope.
+Allow commands: unminimize
+
+core:window:deny-available-monitors
+Denies the available_monitors command without any pre-configured scope.
+Deny commands: available_monitors
+
+core:window:deny-center
+Denies the center command without any pre-configured scope.
+Deny commands: center
+
+core:window:deny-close
+Denies the close command without any pre-configured scope.
+Deny commands: close
+
+core:window:deny-create
+Denies the create command without any pre-configured scope.
+Deny commands: create
+
+core:window:deny-current-monitor
+Denies the current_monitor command without any pre-configured scope.
+Deny commands: current_monitor
+
+core:window:deny-cursor-position
+Denies the cursor_position command without any pre-configured scope.
+Deny commands: cursor_position
+
+core:window:deny-destroy
+Denies the destroy command without any pre-configured scope.
+Deny commands: destroy
+
+core:window:deny-get-all-windows
+Denies the get_all_windows command without any pre-configured scope.
+Deny commands: get_all_windows
+
+core:window:deny-hide
+Denies the hide command without any pre-configured scope.
+Deny commands: hide
+
+core:window:deny-inner-position
+Denies the inner_position command without any pre-configured scope.
+Deny commands: inner_position
+
+core:window:deny-inner-size
+Denies the inner_size command without any pre-configured scope.
+Deny commands: inner_size
+
+core:window:deny-internal-toggle-maximize
+Denies the internal_toggle_maximize command without any pre-configured scope.
+Deny commands: internal_toggle_maximize
+
+core:window:deny-is-always-on-top
+Denies the is_always_on_top command without any pre-configured scope.
+Deny commands: is_always_on_top
+
+core:window:deny-is-closable
+Denies the is_closable command without any pre-configured scope.
+Deny commands: is_closable
+
+core:window:deny-is-decorated
+Denies the is_decorated command without any pre-configured scope.
+Deny commands: is_decorated
+
+core:window:deny-is-enabled
+Denies the is_enabled command without any pre-configured scope.
+Deny commands: is_enabled
+
+core:window:deny-is-focused
+Denies the is_focused command without any pre-configured scope.
+Deny commands: is_focused
+
+core:window:deny-is-fullscreen
+Denies the is_fullscreen command without any pre-configured scope.
+Deny commands: is_fullscreen
+
+core:window:deny-is-maximizable
+Denies the is_maximizable command without any pre-configured scope.
+Deny commands: is_maximizable
+
+core:window:deny-is-maximized
+Denies the is_maximized command without any pre-configured scope.
+Deny commands: is_maximized
+
+core:window:deny-is-minimizable
+Denies the is_minimizable command without any pre-configured scope.
+Deny commands: is_minimizable
+
+core:window:deny-is-minimized
+Denies the is_minimized command without any pre-configured scope.
+Deny commands: is_minimized
+
+core:window:deny-is-resizable
+Denies the is_resizable command without any pre-configured scope.
+Deny commands: is_resizable
+
+core:window:deny-is-visible
+Denies the is_visible command without any pre-configured scope.
+Deny commands: is_visible
+
+core:window:deny-maximize
+Denies the maximize command without any pre-configured scope.
+Deny commands: maximize
+
+core:window:deny-minimize
+Denies the minimize command without any pre-configured scope.
+Deny commands: minimize
+
+core:window:deny-monitor-from-point
+Denies the monitor_from_point command without any pre-configured scope.
+Deny commands: monitor_from_point
+
+core:window:deny-outer-position
+Denies the outer_position command without any pre-configured scope.
+Deny commands: outer_position
+
+core:window:deny-outer-size
+Denies the outer_size command without any pre-configured scope.
+Deny commands: outer_size
+
+core:window:deny-primary-monitor
+Denies the primary_monitor command without any pre-configured scope.
+Deny commands: primary_monitor
+
+core:window:deny-request-user-attention
+Denies the request_user_attention command without any pre-configured scope.
+Deny commands: request_user_attention
+
+core:window:deny-scale-factor
+Denies the scale_factor command without any pre-configured scope.
+Deny commands: scale_factor
+
+core:window:deny-set-always-on-bottom
+Denies the set_always_on_bottom command without any pre-configured scope.
+Deny commands: set_always_on_bottom
+
+core:window:deny-set-always-on-top
+Denies the set_always_on_top command without any pre-configured scope.
+Deny commands: set_always_on_top
+
+core:window:deny-set-background-color
+Denies the set_background_color command without any pre-configured scope.
+Deny commands: set_background_color
+
+core:window:deny-set-badge-count
+Denies the set_badge_count command without any pre-configured scope.
+Deny commands: set_badge_count
+
+core:window:deny-set-badge-label
+Denies the set_badge_label command without any pre-configured scope.
+Deny commands: set_badge_label
+
+core:window:deny-set-closable
+Denies the set_closable command without any pre-configured scope.
+Deny commands: set_closable
+
+core:window:deny-set-content-protected
+Denies the set_content_protected command without any pre-configured scope.
+Deny commands: set_content_protected
+
+core:window:deny-set-cursor-grab
+Denies the set_cursor_grab command without any pre-configured scope.
+Deny commands: set_cursor_grab
+
+core:window:deny-set-cursor-icon
+Denies the set_cursor_icon command without any pre-configured scope.
+Deny commands: set_cursor_icon
+
+core:window:deny-set-cursor-position
+Denies the set_cursor_position command without any pre-configured scope.
+Deny commands: set_cursor_position
+
+core:window:deny-set-cursor-visible
+Denies the set_cursor_visible command without any pre-configured scope.
+Deny commands: set_cursor_visible
+
+core:window:deny-set-decorations
+Denies the set_decorations command without any pre-configured scope.
+Deny commands: set_decorations
+
+core:window:deny-set-effects
+Denies the set_effects command without any pre-configured scope.
+Deny commands: set_effects
+
+core:window:deny-set-enabled
+Denies the set_enabled command without any pre-configured scope.
+Deny commands: set_enabled
+
+core:window:deny-set-focus
+Denies the set_focus command without any pre-configured scope.
+Deny commands: set_focus
+
+core:window:deny-set-focusable
+Denies the set_focusable command without any pre-configured scope.
+Deny commands: set_focusable
+
+core:window:deny-set-fullscreen
+Denies the set_fullscreen command without any pre-configured scope.
+Deny commands: set_fullscreen
+
+core:window:deny-set-icon
+Denies the set_icon command without any pre-configured scope.
+Deny commands: set_icon
+
+core:window:deny-set-ignore-cursor-events
+Denies the set_ignore_cursor_events command without any pre-configured scope.
+Deny commands: set_ignore_cursor_events
+
+core:window:deny-set-max-size
+Denies the set_max_size command without any pre-configured scope.
+Deny commands: set_max_size
+
+core:window:deny-set-maximizable
+Denies the set_maximizable command without any pre-configured scope.
+Deny commands: set_maximizable
+
+core:window:deny-set-min-size
+Denies the set_min_size command without any pre-configured scope.
+Deny commands: set_min_size
+
+core:window:deny-set-minimizable
+Denies the set_minimizable command without any pre-configured scope.
+Deny commands: set_minimizable
+
+core:window:deny-set-overlay-icon
+Denies the set_overlay_icon command without any pre-configured scope.
+Deny commands: set_overlay_icon
+
+core:window:deny-set-position
+Denies the set_position command without any pre-configured scope.
+Deny commands: set_position
+
+core:window:deny-set-progress-bar
+Denies the set_progress_bar command without any pre-configured scope.
+Deny commands: set_progress_bar
+
+core:window:deny-set-resizable
+Denies the set_resizable command without any pre-configured scope.
+Deny commands: set_resizable
+
+core:window:deny-set-shadow
+Denies the set_shadow command without any pre-configured scope.
+Deny commands: set_shadow
+
+core:window:deny-set-simple-fullscreen
+Denies the set_simple_fullscreen command without any pre-configured scope.
+Deny commands: set_simple_fullscreen
+
+core:window:deny-set-size
+Denies the set_size command without any pre-configured scope.
+Deny commands: set_size
+
+core:window:deny-set-size-constraints
+Denies the set_size_constraints command without any pre-configured scope.
+Deny commands: set_size_constraints
+
+core:window:deny-set-skip-taskbar
+Denies the set_skip_taskbar command without any pre-configured scope.
+Deny commands: set_skip_taskbar
+
+core:window:deny-set-theme
+Denies the set_theme command without any pre-configured scope.
+Deny commands: set_theme
+
+core:window:deny-set-title
+Denies the set_title command without any pre-configured scope.
+Deny commands: set_title
+
+core:window:deny-set-title-bar-style
+Denies the set_title_bar_style command without any pre-configured scope.
+Deny commands: set_title_bar_style
+
+core:window:deny-set-visible-on-all-workspaces
+Denies the set_visible_on_all_workspaces command without any pre-configured scope.
+Deny commands: set_visible_on_all_workspaces
+
+core:window:deny-show
+Denies the show command without any pre-configured scope.
+Deny commands: show
+
+core:window:deny-start-dragging
+Denies the start_dragging command without any pre-configured scope.
+Deny commands: start_dragging
+
+core:window:deny-start-resize-dragging
+Denies the start_resize_dragging command without any pre-configured scope.
+Deny commands: start_resize_dragging
+
+core:window:deny-theme
+Denies the theme command without any pre-configured scope.
+Deny commands: theme
+
+core:window:deny-title
+Denies the title command without any pre-configured scope.
+Deny commands: title
+
+core:window:deny-toggle-maximize
+Denies the toggle_maximize command without any pre-configured scope.
+Deny commands: toggle_maximize
+
+core:window:deny-unmaximize
+Denies the unmaximize command without any pre-configured scope.
+Deny commands: unmaximize
+
+core:window:deny-unminimize
+Denies the unminimize command without any pre-configured scope.
+Deny commands: unminimize
+

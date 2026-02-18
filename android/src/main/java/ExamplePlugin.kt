@@ -1,8 +1,10 @@
 package com.plugin.android.mediastore
 
 import android.app.Activity
+import android.Manifest
 import app.tauri.annotation.Command
 import app.tauri.annotation.InvokeArg
+import app.tauri.annotation.Permission
 import app.tauri.annotation.TauriPlugin
 import app.tauri.plugin.JSObject
 import app.tauri.plugin.Plugin
@@ -13,7 +15,18 @@ class PingArgs {
   var value: String? = null
 }
 
-@TauriPlugin
+@TauriPlugin(
+    permissions = [
+        Permission(
+            strings = [Manifest.permission.READ_MEDIA_AUDIO],
+            alias = "audio"
+        ),
+        Permission(
+            strings = [Manifest.permission.READ_EXTERNAL_STORAGE],
+            alias = "storage"
+        )
+    ]
+)
 class ExamplePlugin(private val activity: Activity): Plugin(activity) {
     private val implementation = Example(activity)
 

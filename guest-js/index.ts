@@ -1,4 +1,4 @@
-import { invoke } from '@tauri-apps/api/core'
+import { invoke, PermissionState } from '@tauri-apps/api/core'
 
 export async function ping(value: string): Promise<string | null> {
   return await invoke<{value?: string}>('plugin:android-mediastore|ping', {
@@ -23,4 +23,19 @@ export interface AudioFilesResponse {
 
 export async function getAudioFiles(): Promise<AudioFilesResponse> {
   return await invoke<AudioFilesResponse>('plugin:android-mediastore|get_audio_files');
+}
+
+export interface PermissionStateResponse {
+  audio?: PermissionState;
+  storage?: PermissionState;
+}
+
+export async function checkPermissions(): Promise<PermissionStateResponse> {
+  return await invoke<PermissionStateResponse>('plugin:android-mediastore|checkPermissions');
+}
+
+export async function requestPermissions(permissions?: string[]): Promise<PermissionStateResponse> {
+  return await invoke<PermissionStateResponse>('plugin:android-mediastore|requestPermissions', {
+    payload: { permissions }
+  });
 }

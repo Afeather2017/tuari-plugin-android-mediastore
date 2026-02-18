@@ -5,7 +5,7 @@ Default permissions for the plugin
 #### This default permission set includes the following:
 
 - `allow-ping`
-- `allow-get-audio-files`
+- `allow-read-audio-files`
 
 ## Permission Table
 
