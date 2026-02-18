@@ -1,0 +1,13 @@
+# Android runtime permissions for audio file access
+
+[[permission]]
+identifier = "allow-read-audio-files"
+description = "<h4>Allows reading audio files from the device MediaStore.</h4>Enables the get_audio_files command and requests the READ_MEDIA_AUDIO (Android 13+) or READ_EXTERNAL_STORAGE (Android 12 and below) permission."
+commands.allow = ["get_audio_files"]
+platforms = ["android"]
+
+[[permission]]
+identifier = "deny-read-audio-files"
+description = "Denies reading audio files from the device MediaStore without any pre-configured scope."
+commands.deny = ["get_audio_files"]
+platforms = ["android"]
