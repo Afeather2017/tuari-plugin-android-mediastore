@@ -2,6 +2,7 @@ package com.plugin.android.mediastore
 
 import android.app.Activity
 import android.Manifest
+import android.util.Log
 import app.tauri.annotation.Command
 import app.tauri.annotation.InvokeArg
 import app.tauri.annotation.Permission
@@ -29,6 +30,7 @@ class PingArgs {
 )
 class ExamplePlugin(private val activity: Activity): Plugin(activity) {
     private val implementation = Example(activity)
+    private val TAG = "ExamplePlugin"
 
     @Command
     fun ping(invoke: Invoke) {
@@ -41,6 +43,7 @@ class ExamplePlugin(private val activity: Activity): Plugin(activity) {
 
     @Command
     fun getAudioFiles(invoke: Invoke) {
+        Log.i(TAG, "Getting audio files...")
         val result = implementation.getAudioFiles()
         invoke.resolve(result)
     }

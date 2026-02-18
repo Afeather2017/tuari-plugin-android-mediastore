@@ -1,3 +1,3 @@
 [default]
 description = "Default permissions for the plugin"
-permissions = ["allow-ping", "allow-read-audio-files"]
+permissions = ["allow-ping", "allow-read-audio-files", "allow-check-permissions", "allow-request-permissions"]

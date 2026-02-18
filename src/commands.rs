@@ -18,3 +18,18 @@ pub(crate) async fn get_audio_files<R: Runtime>(
 ) -> Result<AudioFilesResponse> {
     app.android_mediastore().get_audio_files()
 }
+
+#[command]
+pub(crate) async fn check_permissions<R: Runtime>(
+    app: AppHandle<R>,
+) -> Result<PermissionStatus> {
+    app.android_mediastore().check_permissions()
+}
+
+#[command]
+pub(crate) async fn request_permissions<R: Runtime>(
+    app: AppHandle<R>,
+    permissions: Option<Vec<String>>,
+) -> Result<PermissionStatus> {
+    app.android_mediastore().request_permissions(permissions)
+}

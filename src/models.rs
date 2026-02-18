@@ -28,3 +28,22 @@ pub struct AudioFile {
 pub struct AudioFilesResponse {
   pub files: Vec<AudioFile>,
 }
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionStatus {
+  pub audio: Option<PermissionState>,
+  pub storage: Option<PermissionState>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum PermissionState {
+  Granted,
+  Partial,
+  Denied,
+  Unknown,
+  Prompt,
+  #[serde(rename = "prompt-with-rationale")]
+  PromptWithRationale,
+}

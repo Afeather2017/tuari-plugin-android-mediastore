@@ -1,4 +1,5 @@
 use serde::de::DeserializeOwned;
+use serde_json;
 use tauri::{
   plugin::{PluginApi, PluginHandle},
   AppHandle, Runtime,
@@ -26,6 +27,7 @@ pub struct AndroidMediastore<R: Runtime>(PluginHandle<R>);
 
 impl<R: Runtime> AndroidMediastore<R> {
   pub fn ping(&self, payload: PingRequest) -> crate::Result<PingResponse> {
+    self.check_permissions();
     self
       .0
       .run_mobile_plugin("ping", payload)
@@ -36,6 +38,24 @@ impl<R: Runtime> AndroidMediastore<R> {
     self
       .0
       .run_mobile_plugin("getAudioFiles", ())
+      .map_err(Into::into)
+  }
+
+  pub fn check_permissions(&self) -> crate::Result<PermissionStatus> {
+    println!("check_permissions");
+    self
+      .0
+      .run_mobile_plugin("checkPermissions", ())
+      .map_err(Into::into)
+  }
+
+  pub fn request_permissions(&self, permissions: Option<Vec<String>>) -> crate::Result<PermissionStatus> {
+    self
+      .0
+      .run_mobile_plugin(
+        "requestPermissions",
+        serde_json::json!({ "permissions": permissions }),
+      )
       .map_err(Into::into)
   }
 }
