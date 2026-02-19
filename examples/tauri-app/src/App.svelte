@@ -28,14 +28,22 @@
 	async function testFileReader(file) {
 		selectedFile = file
 		readerTestResult = `Testing file reader for: ${file.title}\n`
+		readerTestResult += `Content URI: ${file.contentUri}\n`
 
 		try {
+			readerTestResult += `Creating MediaFileReader...\n`
 			const reader = new MediaFileReader(file.contentUri)
+			readerTestResult += `Opening file...\n`
 			await reader.open()
 			readerTestResult += `Session opened (ID: ${reader.currentSessionId})\n`
 
 			// Read first 4 bytes
+			readerTestResult += `Reading first 4 bytes...\n`
 			const first4 = await reader.read(4)
+			readerTestResult += `First 4 bytes response: success=${first4.success}, bytesRead=${first4.bytesRead}, isEof=${first4.isEof}\n`
+			if (first4.error) {
+				readerTestResult += `Error: ${first4.error}\n`
+			}
 			if (first4.data) {
 				const bytes = base64ToUint8Array(first4.data)
 				const hex = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('')
@@ -63,7 +71,9 @@
 			await reader.close()
 			readerTestResult += `Session closed\n`
 		} catch (e) {
-			readerTestResult += `Error: ${e.message}\n`
+			readerTestResult += `Error: ${e?.message || String(e)}\n`
+			readerTestResult += `Error type: ${typeof e}\n`
+			readerTestResult += `Error details: ${JSON.stringify(e)}\n`
 		}
 	}
 </script>

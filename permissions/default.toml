@@ -1,3 +1,14 @@
 [default]
 description = "Default permissions for the plugin"
-permissions = ["allow-ping", "allow-read-audio-files", "allow-check-permissions", "allow-request-permissions"]
+permissions = [
+  "allow-ping",
+  "allow-read-audio-files",
+  "allow-check-permissions",
+  "allow-request-permissions",
+  "allow-file-reader-open",
+  "allow-file-reader-read",
+  "allow-file-reader-close",
+  "allow-file-reader-seek",
+  "allow-file-reader-read-to-end",
+  "allow-file-reader-info"
+]

@@ -134,13 +134,16 @@ class MediaStoreHelper(private val context: Context) {
         var fileSize: Long? = null
 
         try {
+            Log.d(TAG, "[openFileReader] Starting with contentUri: $contentUri")
             val uri = Uri.parse(contentUri)
+            Log.d(TAG, "[openFileReader] Parsed URI: $uri")
             val inputStream = context.contentResolver.openInputStream(uri)
 
             if (inputStream == null) {
-                Log.e(TAG, "Failed to open input stream for $contentUri")
-                throw Exception("Failed to open input stream")
+                Log.e(TAG, "[openFileReader] Failed to open input stream for $contentUri - contentResolver returned null")
+                throw Exception("Failed to open input stream - contentResolver returned null")
             }
+            Log.d(TAG, "[openFileReader] Successfully opened input stream")
 
             // Try to get file size
             val cursor = context.contentResolver.query(uri, null, null, null, null)
@@ -149,9 +152,12 @@ class MediaStoreHelper(private val context: Context) {
                     val sizeIndex = it.getColumnIndex(android.provider.OpenableColumns.SIZE)
                     if (sizeIndex != -1) {
                         fileSize = it.getLong(sizeIndex)
+                        Log.d(TAG, "[openFileReader] File size from cursor: $fileSize")
+                    } else {
+                        Log.w(TAG, "[openFileReader] SIZE column not found in cursor")
                     }
                 }
-            }
+            } ?: Log.w(TAG, "[openFileReader] Cursor is null, cannot determine file size")
 
             val session = FileReaderSession(
                 sessionId = sessionId,
@@ -162,9 +168,9 @@ class MediaStoreHelper(private val context: Context) {
             )
 
             fileReaders[sessionId] = session
-            Log.d(TAG, "Opened file reader session $sessionId for $contentUri, size: $fileSize")
+            Log.d(TAG, "[openFileReader] Opened file reader session $sessionId for $contentUri, size: $fileSize")
         } catch (e: Exception) {
-            Log.e(TAG, "Error opening file reader for $contentUri", e)
+            Log.e(TAG, "[openFileReader] Error opening file reader for $contentUri: ${e.message}", e)
             throw e
         }
 
@@ -172,16 +178,18 @@ class MediaStoreHelper(private val context: Context) {
     }
 
     fun readFile(sessionId: Long, size: Int): ReadResult {
+        Log.d(TAG, "[readFile] Reading from session $sessionId, size: $size")
         val session = fileReaders[sessionId]
 
         if (session == null) {
-            Log.e(TAG, "Invalid session ID: $sessionId")
+            Log.e(TAG, "[readFile] Invalid session ID: $sessionId, active sessions: ${fileReaders.keys}")
             return ReadResult(false, null, 0, false, "INVALID_SESSION")
         }
 
         return try {
             val buffer = ByteArray(size)
             val bytesRead = session.inputStream.read(buffer)
+            Log.d(TAG, "[readFile] Read $bytesRead bytes from session $sessionId")
 
             if (bytesRead > 0) {
                 session.position += bytesRead
@@ -191,13 +199,15 @@ class MediaStoreHelper(private val context: Context) {
                     buffer
                 }
                 val base64Data = Base64.encodeToString(dataToSend, Base64.NO_WRAP)
+                Log.d(TAG, "[readFile] Successfully encoded $bytesRead bytes to base64")
                 ReadResult(true, base64Data, bytesRead, false, null)
             } else {
                 // EOF reached
+                Log.d(TAG, "[readFile] EOF reached for session $sessionId")
                 ReadResult(true, null, 0, true, null)
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error reading from session $sessionId", e)
+            Log.e(TAG, "[readFile] Error reading from session $sessionId: ${e.message}", e)
             ReadResult(false, null, 0, false, "READ_ERROR: ${e.message}")
         }
     }

@@ -82,10 +82,13 @@ class ExamplePlugin(private val activity: Activity): Plugin(activity) {
 
     @Command
     fun openFileReader(invoke: Invoke) {
+        Log.d(TAG, "[openFileReader] Command invoked")
         val args = invoke.parseArgs(FileReaderOpenArgs::class.java)
         val contentUri = args.contentUri
+        Log.d(TAG, "[openFileReader] Parsed args - contentUri: $contentUri")
 
         if (contentUri == null) {
+            Log.e(TAG, "[openFileReader] contentUri is null!")
             val ret = JSObject()
             ret.put("success", false)
             ret.put("error", "INVALID_ARGUMENTS")
@@ -94,20 +97,27 @@ class ExamplePlugin(private val activity: Activity): Plugin(activity) {
         }
 
         val result = implementation.openFileReader(contentUri)
+        Log.d(TAG, "[openFileReader] Result: success=${result.get("success")}, sessionId=${result.get("sessionId")}")
         invoke.resolve(result)
     }
 
     @Command
     fun readFile(invoke: Invoke) {
+        Log.d(TAG, "[readFile] Command invoked")
         val args = invoke.parseArgs(FileReaderReadArgs::class.java)
+        Log.d(TAG, "[readFile] Parsed args - sessionId: ${args.sessionId}, size: ${args.size}")
         val result = implementation.readFile(args.sessionId, args.size)
+        Log.d(TAG, "[readFile] Result: success=${result.get("success")}, bytesRead=${result.get("bytesRead")}")
         invoke.resolve(result)
     }
 
     @Command
     fun closeFileReader(invoke: Invoke) {
+        Log.d(TAG, "[closeFileReader] Command invoked")
         val args = invoke.parseArgs(FileReaderCloseArgs::class.java)
+        Log.d(TAG, "[closeFileReader] Parsed args - sessionId: ${args.sessionId}")
         val result = implementation.closeFileReader(args.sessionId)
+        Log.d(TAG, "[closeFileReader] Result: success=${result.get("success")}")
         invoke.resolve(result)
     }
 

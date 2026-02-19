@@ -143,14 +143,21 @@ export class MediaFileReader {
       throw new Error('File reader is already open');
     }
 
-    const result = await fileReaderOpen(this.contentUri);
+    try {
+      const result = await fileReaderOpen(this.contentUri);
 
-    if (!result.success) {
-      throw new Error(result.error || 'Failed to open file reader');
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to open file reader');
+      }
+
+      this.sessionId = result.sessionId;
+      this._isOpen = true;
+    } catch (e) {
+      if (e instanceof Error) {
+        throw e;
+      }
+      throw new Error(String(e));
     }
-
-    this.sessionId = result.sessionId;
-    this._isOpen = true;
   }
 
   /**
@@ -163,7 +170,14 @@ export class MediaFileReader {
       throw new Error('File reader is not open');
     }
 
-    return await fileReaderRead(this.sessionId, size);
+    try {
+      return await fileReaderRead(this.sessionId, size);
+    } catch (e) {
+      if (e instanceof Error) {
+        throw e;
+      }
+      throw new Error(String(e));
+    }
   }
 
   /**

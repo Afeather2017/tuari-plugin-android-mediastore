@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-file-reader-open"
+description = "Enables the file_reader_open command without any pre-configured scope."
+commands.allow = ["file_reader_open"]
+
+[[permission]]
+identifier = "deny-file-reader-open"
+description = "Denies the file_reader_open command without any pre-configured scope."
+commands.deny = ["file_reader_open"]

@@ -38,21 +38,25 @@ class Example(private val activity: Activity) {
     }
 
     fun openFileReader(contentUri: String): JSObject {
+        Log.d(TAG, "[openFileReader] Called with contentUri: $contentUri")
         val ret = JSObject()
         try {
             val (sessionId, fileSize) = mediaStoreHelper.openFileReader(contentUri)
             ret.put("success", true)
             ret.put("sessionId", sessionId)
             ret.put("fileSize", fileSize)
+            Log.d(TAG, "[openFileReader] Success - sessionId: $sessionId, fileSize: $fileSize")
         } catch (e: Exception) {
-            Log.e(TAG, "Error opening file reader", e)
+            Log.e(TAG, "[openFileReader] Error: ${e.message}", e)
             ret.put("success", false)
             ret.put("error", e.message)
         }
+        Log.d(TAG, "[openFileReader] Returning: $ret")
         return ret
     }
 
     fun readFile(sessionId: Long, size: Int): JSObject {
+        Log.d(TAG, "[readFile] Called with sessionId: $sessionId, size: $size")
         val ret = JSObject()
         val result = mediaStoreHelper.readFile(sessionId, size)
         ret.put("success", result.success)
@@ -60,16 +64,19 @@ class Example(private val activity: Activity) {
         ret.put("bytesRead", result.bytesRead)
         ret.put("isEof", result.isEof)
         ret.put("error", result.error)
+        Log.d(TAG, "[readFile] Returning - success: ${result.success}, bytesRead: ${result.bytesRead}, isEof: ${result.isEof}")
         return ret
     }
 
     fun closeFileReader(sessionId: Long): JSObject {
+        Log.d(TAG, "[closeFileReader] Called with sessionId: $sessionId")
         val ret = JSObject()
         val closed = mediaStoreHelper.closeFileReader(sessionId)
         ret.put("success", closed)
         if (!closed) {
             ret.put("error", "FAILED_TO_CLOSE")
         }
+        Log.d(TAG, "[closeFileReader] Returning - success: $closed")
         return ret
     }
 
