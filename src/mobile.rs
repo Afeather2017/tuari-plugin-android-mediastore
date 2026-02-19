@@ -42,6 +42,49 @@ impl<R: Runtime> AndroidMediastore<R> {
       .map_err(Into::into)
   }
 
+  pub fn file_reader_open(&self, payload: FileReaderOpenRequest) -> crate::Result<FileReaderOpenResponse> {
+    self.check_permissions_and_request_if_needed();
+    self
+      .0
+      .run_mobile_plugin("openFileReader", payload)
+      .map_err(Into::into)
+  }
+
+  pub fn file_reader_read(&self, payload: FileReaderReadRequest) -> crate::Result<FileReaderReadResponse> {
+    self
+      .0
+      .run_mobile_plugin("readFile", payload)
+      .map_err(Into::into)
+  }
+
+  pub fn file_reader_close(&self, payload: FileReaderCloseRequest) -> crate::Result<FileReaderCloseResponse> {
+    self
+      .0
+      .run_mobile_plugin("closeFileReader", payload)
+      .map_err(Into::into)
+  }
+
+  pub fn file_reader_seek(&self, payload: FileReaderSeekRequest) -> crate::Result<FileReaderSeekResponse> {
+    self
+      .0
+      .run_mobile_plugin("seekFile", payload)
+      .map_err(Into::into)
+  }
+
+  pub fn file_reader_read_to_end(&self, payload: FileReaderReadToEndRequest) -> crate::Result<FileReaderReadToEndResponse> {
+    self
+      .0
+      .run_mobile_plugin("readToEnd", payload)
+      .map_err(Into::into)
+  }
+
+  pub fn file_reader_info(&self, payload: FileReaderInfoRequest) -> crate::Result<FileReaderInfoResponse> {
+    self
+      .0
+      .run_mobile_plugin("getFileReaderInfo", payload)
+      .map_err(Into::into)
+  }
+
   fn check_permissions(&self) -> crate::Result<PermissionStatus> {
     self
       .0

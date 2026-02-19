@@ -35,7 +35,16 @@ impl<R: Runtime, T: Manager<R>> crate::AndroidMediastoreExt<R> for T {
 /// Initializes the plugin.
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
   Builder::new("android-mediastore")
-    .invoke_handler(tauri::generate_handler![commands::ping, commands::get_audio_files])
+    .invoke_handler(tauri::generate_handler![
+      commands::ping,
+      commands::get_audio_files,
+      commands::file_reader_open,
+      commands::file_reader_read,
+      commands::file_reader_close,
+      commands::file_reader_seek,
+      commands::file_reader_read_to_end,
+      commands::file_reader_info,
+    ])
     .setup(|app, api| {
       #[cfg(mobile)]
       let android_mediastore = mobile::init(app, api)?;

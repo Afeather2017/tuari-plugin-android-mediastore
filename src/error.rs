@@ -9,6 +9,8 @@ pub enum Error {
   #[cfg(mobile)]
   #[error(transparent)]
   PluginInvoke(#[from] tauri::plugin::mobile::PluginInvokeError),
+  #[error("Not supported: {0}")]
+  NotSupported(String),
 }
 
 impl Serialize for Error {
