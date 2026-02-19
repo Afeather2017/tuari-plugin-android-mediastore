@@ -17,7 +17,12 @@
 			const result = await getAudioFiles()
 			updateResponse(`Found ${result.files.length} audio files`)
 			result.files.slice(0, 5).forEach(file => {
-				updateResponse(`  - ${file.title} by ${file.artist}`)
+				updateResponse(`  - ${file.title}`)
+				updateResponse(`    Artist: ${file.artist}`)
+				updateResponse(`    Album: ${file.album}`)
+				updateResponse(`    Duration: ${file.duration}ms`)
+				updateResponse(`    Content URI: ${file.contentUri}`)
+				updateResponse(`    First 4 Bytes: ${file.firstFourBytes || 'N/A'}`)
 			})
 			if (result.files.length > 5) {
 				updateResponse(`  ... and ${result.files.length - 5} more`)

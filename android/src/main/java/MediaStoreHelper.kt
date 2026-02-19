@@ -1,5 +1,6 @@
 package com.plugin.android.mediastore
 
+import android.content.ContentUris
 import android.content.Context
 import android.provider.MediaStore
 import android.util.Log
@@ -10,7 +11,8 @@ data class AudioFileData(
     val artist: String,
     val album: String,
     val duration: Long,
-    val filePath: String
+    val contentUri: String,
+    val firstFourBytes: String?
 )
 
 class MediaStoreHelper(private val context: Context) {
@@ -24,8 +26,7 @@ class MediaStoreHelper(private val context: Context) {
             MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.ALBUM,
-            MediaStore.Audio.Media.DURATION,
-            MediaStore.Audio.Media.DATA
+            MediaStore.Audio.Media.DURATION
         )
 
         val selection = "${MediaStore.Audio.Media.IS_MUSIC} = ?"
@@ -48,7 +49,6 @@ class MediaStoreHelper(private val context: Context) {
                 val artistColumn = it.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
                 val albumColumn = it.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)
                 val durationColumn = it.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
-                val dataColumn = it.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
 
                 while (it.moveToNext()) {
                     val id = it.getLong(idColumn)
@@ -56,9 +56,10 @@ class MediaStoreHelper(private val context: Context) {
                     val artist = it.getString(artistColumn) ?: "Unknown Artist"
                     val album = it.getString(albumColumn) ?: "Unknown Album"
                     val duration = it.getLong(durationColumn)
-                    val filePath = it.getString(dataColumn) ?: ""
+                    val contentUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id).toString()
+                    val firstFourBytes = readFirstFourBytes(contentUri)
 
-                    audioFiles.add(AudioFileData(id, title, artist, album, duration, filePath))
+                    audioFiles.add(AudioFileData(id, title, artist, album, duration, contentUri, firstFourBytes))
                 }
             }
 
@@ -68,5 +69,23 @@ class MediaStoreHelper(private val context: Context) {
         }
 
         return audioFiles
+    }
+
+    private fun readFirstFourBytes(contentUriString: String): String? {
+        return try {
+            val uri = android.net.Uri.parse(contentUriString)
+            context.contentResolver.openInputStream(uri)?.use { inputStream ->
+                val bytes = ByteArray(4)
+                val bytesRead = inputStream.read(bytes)
+                if (bytesRead > 0) {
+                    bytes.joinToString("") { "%02x".format(it) }.uppercase()
+                } else {
+                    null
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error reading file bytes for $contentUriString", e)
+            null
+        }
     }
 }

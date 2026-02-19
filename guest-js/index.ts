@@ -14,7 +14,8 @@ export interface AudioFile {
   artist: string;
   album: string;
   duration: number;
-  filePath: string;
+  contentUri: string;
+  firstFourBytes?: string;
 }
 
 export interface AudioFilesResponse {

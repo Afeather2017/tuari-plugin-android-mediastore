@@ -20,7 +20,8 @@ pub struct AudioFile {
   pub artist: String,
   pub album: String,
   pub duration: i64,
-  pub file_path: String,
+  pub content_uri: String,
+  pub first_four_bytes: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

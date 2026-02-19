@@ -25,7 +25,8 @@ class Example(private val activity: Activity) {
             fileObj.put("artist", file.artist)
             fileObj.put("album", file.album)
             fileObj.put("duration", file.duration)
-            fileObj.put("filePath", file.filePath)
+            fileObj.put("contentUri", file.contentUri)
+            fileObj.put("firstFourBytes", file.firstFourBytes)
             filesArray.put(fileObj)
         }
 
