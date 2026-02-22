@@ -10,6 +10,7 @@ import app.tauri.annotation.TauriPlugin
 import app.tauri.plugin.JSObject
 import app.tauri.plugin.Plugin
 import app.tauri.plugin.Invoke
+import kotlinx.coroutines.*
 
 @InvokeArg
 class PingArgs {
@@ -67,79 +68,126 @@ class MediaStorePlugin(private val activity: Activity): Plugin(activity) {
 
     @Command
     fun ping(invoke: Invoke) {
-        val args = invoke.parseArgs(PingArgs::class.java)
-
-        val ret = JSObject()
-        ret.put("value", example.pong(args.value ?: "default value :("))
-        invoke.resolve(ret)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val args = invoke.parseArgs(PingArgs::class.java)
+                val ret = JSObject()
+                ret.put("value", example.pong(args.value ?: "default value :("))
+                invoke.resolve(ret)
+            } catch (e: Exception) {
+                invoke.reject(e.message ?: "Unknown error")
+            }
+        }
     }
 
     @Command
     fun getAudioFiles(invoke: Invoke) {
-        Log.i(TAG, "Getting audio files...")
-        val result = commands.getAudioFiles()
-        invoke.resolve(result)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                Log.i(TAG, "Getting audio files...")
+                val result = commands.getAudioFiles()
+                invoke.resolve(result)
+            } catch (e: Exception) {
+                invoke.reject(e.message ?: "Unknown error")
+            }
+        }
     }
 
     @Command
     fun openFileReader(invoke: Invoke) {
-        Log.d(TAG, "[openFileReader] Command invoked")
-        val args = invoke.parseArgs(FileReaderOpenArgs::class.java)
-        val contentUri = args.contentUri
-        Log.d(TAG, "[openFileReader] Parsed args - contentUri: $contentUri")
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                Log.d(TAG, "[openFileReader] Command invoked")
+                val args = invoke.parseArgs(FileReaderOpenArgs::class.java)
+                val contentUri = args.contentUri
+                Log.d(TAG, "[openFileReader] Parsed args - contentUri: $contentUri")
 
-        if (contentUri == null) {
-            Log.e(TAG, "[openFileReader] contentUri is null!")
-            val ret = JSObject()
-            ret.put("success", false)
-            ret.put("error", "INVALID_ARGUMENTS")
-            invoke.resolve(ret)
-            return
+                if (contentUri == null) {
+                    Log.e(TAG, "[openFileReader] contentUri is null!")
+                    val ret = JSObject()
+                    ret.put("success", false)
+                    ret.put("error", "INVALID_ARGUMENTS")
+                    invoke.resolve(ret)
+                    return@launch
+                }
+
+                val result = commands.openFileReader(contentUri)
+                Log.d(TAG, "[openFileReader] Result: success=${result.get("success")}, sessionId=${result.get("sessionId")}")
+                invoke.resolve(result)
+            } catch (e: Exception) {
+                invoke.reject(e.message ?: "Unknown error")
+            }
         }
-
-        val result = commands.openFileReader(contentUri)
-        Log.d(TAG, "[openFileReader] Result: success=${result.get("success")}, sessionId=${result.get("sessionId")}")
-        invoke.resolve(result)
     }
 
     @Command
     fun readFile(invoke: Invoke) {
-        Log.d(TAG, "[readFile] Command invoked")
-        val args = invoke.parseArgs(FileReaderReadArgs::class.java)
-        Log.d(TAG, "[readFile] Parsed args - sessionId: ${args.sessionId}, size: ${args.size}")
-        val result = commands.readFile(args.sessionId, args.size)
-        Log.d(TAG, "[readFile] Result: success=${result.get("success")}, bytesRead=${result.get("bytesRead")}")
-        invoke.resolve(result)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                Log.d(TAG, "[readFile] Command invoked")
+                val args = invoke.parseArgs(FileReaderReadArgs::class.java)
+                Log.d(TAG, "[readFile] Parsed args - sessionId: ${args.sessionId}, size: ${args.size}")
+                val result = commands.readFile(args.sessionId, args.size)
+                Log.d(TAG, "[readFile] Result: success=${result.get("success")}, bytesRead=${result.get("bytesRead")}")
+                invoke.resolve(result)
+            } catch (e: Exception) {
+                invoke.reject(e.message ?: "Unknown error")
+            }
+        }
     }
 
     @Command
     fun closeFileReader(invoke: Invoke) {
-        Log.d(TAG, "[closeFileReader] Command invoked")
-        val args = invoke.parseArgs(FileReaderCloseArgs::class.java)
-        Log.d(TAG, "[closeFileReader] Parsed args - sessionId: ${args.sessionId}")
-        val result = commands.closeFileReader(args.sessionId)
-        Log.d(TAG, "[closeFileReader] Result: success=${result.get("success")}")
-        invoke.resolve(result)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                Log.d(TAG, "[closeFileReader] Command invoked")
+                val args = invoke.parseArgs(FileReaderCloseArgs::class.java)
+                Log.d(TAG, "[closeFileReader] Parsed args - sessionId: ${args.sessionId}")
+                val result = commands.closeFileReader(args.sessionId)
+                Log.d(TAG, "[closeFileReader] Result: success=${result.get("success")}")
+                invoke.resolve(result)
+            } catch (e: Exception) {
+                invoke.reject(e.message ?: "Unknown error")
+            }
+        }
     }
 
     @Command
     fun seekFile(invoke: Invoke) {
-        val args = invoke.parseArgs(FileReaderSeekArgs::class.java)
-        val result = commands.seekFile(args.sessionId, args.position)
-        invoke.resolve(result)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val args = invoke.parseArgs(FileReaderSeekArgs::class.java)
+                val result = commands.seekFile(args.sessionId, args.position)
+                invoke.resolve(result)
+            } catch (e: Exception) {
+                invoke.reject(e.message ?: "Unknown error")
+            }
+        }
     }
 
     @Command
     fun readToEnd(invoke: Invoke) {
-        val args = invoke.parseArgs(FileReaderReadToEndArgs::class.java)
-        val result = commands.readToEnd(args.sessionId)
-        invoke.resolve(result)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val args = invoke.parseArgs(FileReaderReadToEndArgs::class.java)
+                val result = commands.readToEnd(args.sessionId)
+                invoke.resolve(result)
+            } catch (e: Exception) {
+                invoke.reject(e.message ?: "Unknown error")
+            }
+        }
     }
 
     @Command
     fun getFileReaderInfo(invoke: Invoke) {
-        val args = invoke.parseArgs(FileReaderInfoArgs::class.java)
-        val result = commands.getFileReaderInfo(args.sessionId)
-        invoke.resolve(result)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val args = invoke.parseArgs(FileReaderInfoArgs::class.java)
+                val result = commands.getFileReaderInfo(args.sessionId)
+                invoke.resolve(result)
+            } catch (e: Exception) {
+                invoke.reject(e.message ?: "Unknown error")
+            }
+        }
     }
 }

@@ -14,40 +14,40 @@ pub fn init<R: Runtime, C: DeserializeOwned>(
 pub struct AndroidMediastore<R: Runtime>(AppHandle<R>);
 
 impl<R: Runtime> AndroidMediastore<R> {
-  pub fn ping(&self, payload: PingRequest) -> crate::Result<PingResponse> {
+  pub async fn ping(&self, payload: PingRequest) -> crate::Result<PingResponse> {
     Ok(PingResponse {
       value: payload.value,
     })
   }
 
-  pub fn get_audio_files(&self) -> crate::Result<AudioFilesResponse> {
+  pub async fn get_audio_files(&self) -> crate::Result<AudioFilesResponse> {
     // Desktop stub implementation - returns empty list
     Ok(AudioFilesResponse {
       files: vec![],
     })
   }
 
-  pub fn file_reader_open(&self, _payload: FileReaderOpenRequest) -> crate::Result<FileReaderOpenResponse> {
+  pub async fn file_reader_open(&self, _payload: FileReaderOpenRequest) -> crate::Result<FileReaderOpenResponse> {
     Err(crate::Error::NotSupported("File reader is only supported on Android".to_string()))
   }
 
-  pub fn file_reader_read(&self, _payload: FileReaderReadRequest) -> crate::Result<FileReaderReadResponse> {
+  pub async fn file_reader_read(&self, _payload: FileReaderReadRequest) -> crate::Result<FileReaderReadResponse> {
     Err(crate::Error::NotSupported("File reader is only supported on Android".to_string()))
   }
 
-  pub fn file_reader_close(&self, _payload: FileReaderCloseRequest) -> crate::Result<FileReaderCloseResponse> {
+  pub async fn file_reader_close(&self, _payload: FileReaderCloseRequest) -> crate::Result<FileReaderCloseResponse> {
     Err(crate::Error::NotSupported("File reader is only supported on Android".to_string()))
   }
 
-  pub fn file_reader_seek(&self, _payload: FileReaderSeekRequest) -> crate::Result<FileReaderSeekResponse> {
+  pub async fn file_reader_seek(&self, _payload: FileReaderSeekRequest) -> crate::Result<FileReaderSeekResponse> {
     Err(crate::Error::NotSupported("File reader is only supported on Android".to_string()))
   }
 
-  pub fn file_reader_read_to_end(&self, _payload: FileReaderReadToEndRequest) -> crate::Result<FileReaderReadToEndResponse> {
+  pub async fn file_reader_read_to_end(&self, _payload: FileReaderReadToEndRequest) -> crate::Result<FileReaderReadToEndResponse> {
     Err(crate::Error::NotSupported("File reader is only supported on Android".to_string()))
   }
 
-  pub fn file_reader_info(&self, _payload: FileReaderInfoRequest) -> crate::Result<FileReaderInfoResponse> {
+  pub async fn file_reader_info(&self, _payload: FileReaderInfoRequest) -> crate::Result<FileReaderInfoResponse> {
     Err(crate::Error::NotSupported("File reader is only supported on Android".to_string()))
   }
 }

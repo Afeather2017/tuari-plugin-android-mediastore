@@ -26,7 +26,7 @@ pub fn init<R: Runtime, C: DeserializeOwned>(
 pub struct AndroidMediastore<R: Runtime>(PluginHandle<R>);
 
 impl<R: Runtime> AndroidMediastore<R> {
-  pub fn ping(&self, payload: PingRequest) -> crate::Result<PingResponse> {
+  pub async fn ping(&self, payload: PingRequest) -> crate::Result<PingResponse> {
     let _ = self.check_permissions();
     self
       .0
@@ -34,7 +34,7 @@ impl<R: Runtime> AndroidMediastore<R> {
       .map_err(Into::into)
   }
 
-  pub fn get_audio_files(&self) -> crate::Result<AudioFilesResponse> {
+  pub async fn get_audio_files(&self) -> crate::Result<AudioFilesResponse> {
     self.check_permissions_and_request_if_needed();
     self
       .0
@@ -42,7 +42,7 @@ impl<R: Runtime> AndroidMediastore<R> {
       .map_err(Into::into)
   }
 
-  pub fn file_reader_open(&self, payload: FileReaderOpenRequest) -> crate::Result<FileReaderOpenResponse> {
+  pub async fn file_reader_open(&self, payload: FileReaderOpenRequest) -> crate::Result<FileReaderOpenResponse> {
     self.check_permissions_and_request_if_needed();
     self
       .0
@@ -50,35 +50,35 @@ impl<R: Runtime> AndroidMediastore<R> {
       .map_err(Into::into)
   }
 
-  pub fn file_reader_read(&self, payload: FileReaderReadRequest) -> crate::Result<FileReaderReadResponse> {
+  pub async fn file_reader_read(&self, payload: FileReaderReadRequest) -> crate::Result<FileReaderReadResponse> {
     self
       .0
       .run_mobile_plugin("readFile", payload)
       .map_err(Into::into)
   }
 
-  pub fn file_reader_close(&self, payload: FileReaderCloseRequest) -> crate::Result<FileReaderCloseResponse> {
+  pub async fn file_reader_close(&self, payload: FileReaderCloseRequest) -> crate::Result<FileReaderCloseResponse> {
     self
       .0
       .run_mobile_plugin("closeFileReader", payload)
       .map_err(Into::into)
   }
 
-  pub fn file_reader_seek(&self, payload: FileReaderSeekRequest) -> crate::Result<FileReaderSeekResponse> {
+  pub async fn file_reader_seek(&self, payload: FileReaderSeekRequest) -> crate::Result<FileReaderSeekResponse> {
     self
       .0
       .run_mobile_plugin("seekFile", payload)
       .map_err(Into::into)
   }
 
-  pub fn file_reader_read_to_end(&self, payload: FileReaderReadToEndRequest) -> crate::Result<FileReaderReadToEndResponse> {
+  pub async fn file_reader_read_to_end(&self, payload: FileReaderReadToEndRequest) -> crate::Result<FileReaderReadToEndResponse> {
     self
       .0
       .run_mobile_plugin("readToEnd", payload)
       .map_err(Into::into)
   }
 
-  pub fn file_reader_info(&self, payload: FileReaderInfoRequest) -> crate::Result<FileReaderInfoResponse> {
+  pub async fn file_reader_info(&self, payload: FileReaderInfoRequest) -> crate::Result<FileReaderInfoResponse> {
     self
       .0
       .run_mobile_plugin("getFileReaderInfo", payload)
