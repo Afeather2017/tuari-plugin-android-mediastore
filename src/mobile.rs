@@ -16,7 +16,7 @@ pub fn init<R: Runtime, C: DeserializeOwned>(
   api: PluginApi<R, C>,
 ) -> crate::Result<AndroidMediastore<R>> {
   #[cfg(target_os = "android")]
-  let handle = api.register_android_plugin("com.plugin.android.mediastore", "ExamplePlugin")?;
+  let handle = api.register_android_plugin("com.plugin.android.mediastore", "MediaStorePlugin")?;
   #[cfg(target_os = "ios")]
   let handle = api.register_ios_plugin(init_plugin_android_mediastore)?;
   Ok(AndroidMediastore(handle))

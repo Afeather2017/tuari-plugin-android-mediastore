@@ -1,0 +1,112 @@
+package com.plugin.android.mediastore
+
+import android.app.Activity
+import android.util.Log
+import app.tauri.plugin.JSArray
+import app.tauri.plugin.JSObject
+
+class MediaStoreCommands(private val activity: Activity) {
+    private val mediaStoreHelper = MediaStoreHelper(activity)
+    private val TAG = "MediaStoreCommands"
+
+    fun getAudioFiles(): JSObject {
+        val audioFiles = mediaStoreHelper.getAudioFiles()
+        val filesArray = JSArray()
+
+        audioFiles.forEach { file ->
+            val fileObj = JSObject()
+            fileObj.put("id", file.id)
+            fileObj.put("title", file.title)
+            fileObj.put("artist", file.artist)
+            fileObj.put("album", file.album)
+            fileObj.put("duration", file.duration)
+            fileObj.put("contentUri", file.contentUri)
+            fileObj.put("firstFourBytes", file.firstFourBytes)
+            filesArray.put(fileObj)
+        }
+
+        val ret = JSObject()
+        ret.put("files", filesArray)
+
+        Log.d(TAG, "Returning ${audioFiles.size} audio files")
+        return ret
+    }
+
+    fun openFileReader(contentUri: String): JSObject {
+        Log.d(TAG, "[openFileReader] Called with contentUri: $contentUri")
+        val ret = JSObject()
+        try {
+            val (sessionId, fileSize) = mediaStoreHelper.openFileReader(contentUri)
+            ret.put("success", true)
+            ret.put("sessionId", sessionId)
+            ret.put("fileSize", fileSize)
+            Log.d(TAG, "[openFileReader] Success - sessionId: $sessionId, fileSize: $fileSize")
+        } catch (e: Exception) {
+            Log.e(TAG, "[openFileReader] Error: ${e.message}", e)
+            ret.put("success", false)
+            ret.put("error", e.message)
+        }
+        Log.d(TAG, "[openFileReader] Returning: $ret")
+        return ret
+    }
+
+    fun readFile(sessionId: Long, size: Int): JSObject {
+        Log.d(TAG, "[readFile] Called with sessionId: $sessionId, size: $size")
+        val ret = JSObject()
+        val result = mediaStoreHelper.readFile(sessionId, size)
+        ret.put("success", result.success)
+        ret.put("data", result.data)
+        ret.put("bytesRead", result.bytesRead)
+        ret.put("isEof", result.isEof)
+        ret.put("error", result.error)
+        Log.d(TAG, "[readFile] Returning - success: ${result.success}, bytesRead: ${result.bytesRead}, isEof: ${result.isEof}")
+        return ret
+    }
+
+    fun closeFileReader(sessionId: Long): JSObject {
+        Log.d(TAG, "[closeFileReader] Called with sessionId: $sessionId")
+        val ret = JSObject()
+        val closed = mediaStoreHelper.closeFileReader(sessionId)
+        ret.put("success", closed)
+        if (!closed) {
+            ret.put("error", "FAILED_TO_CLOSE")
+        }
+        Log.d(TAG, "[closeFileReader] Returning - success: $closed")
+        return ret
+    }
+
+    fun seekFile(sessionId: Long, position: Long): JSObject {
+        val ret = JSObject()
+        val result = mediaStoreHelper.seekFile(sessionId, position)
+        ret.put("success", result.success)
+        ret.put("newPosition", result.newPosition)
+        ret.put("error", result.error)
+        return ret
+    }
+
+    fun readToEnd(sessionId: Long): JSObject {
+        val ret = JSObject()
+        val result = mediaStoreHelper.readToEnd(sessionId)
+        ret.put("success", result.success)
+        ret.put("data", result.data)
+        ret.put("bytesRead", result.bytesRead)
+        ret.put("isEof", result.isEof)
+        ret.put("error", result.error)
+        return ret
+    }
+
+    fun getFileReaderInfo(sessionId: Long): JSObject {
+        val ret = JSObject()
+        val info = mediaStoreHelper.getFileReaderInfo(sessionId)
+        if (info != null) {
+            ret.put("sessionId", info.sessionId)
+            ret.put("contentUri", info.contentUri)
+            ret.put("position", info.position)
+            ret.put("fileSize", info.fileSize)
+            ret.put("isOpen", info.isOpen)
+        } else {
+            ret.put("error", "SESSION_NOT_FOUND")
+        }
+        return ret
+    }
+}

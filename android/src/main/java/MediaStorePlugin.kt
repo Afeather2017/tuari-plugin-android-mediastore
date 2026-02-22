@@ -60,23 +60,24 @@ class FileReaderInfoArgs {
         )
     ]
 )
-class ExamplePlugin(private val activity: Activity): Plugin(activity) {
-    private val implementation = Example(activity)
-    private val TAG = "ExamplePlugin"
+class MediaStorePlugin(private val activity: Activity): Plugin(activity) {
+    private val example = Example(activity)
+    private val commands = MediaStoreCommands(activity)
+    private val TAG = "MediaStorePlugin"
 
     @Command
     fun ping(invoke: Invoke) {
         val args = invoke.parseArgs(PingArgs::class.java)
 
         val ret = JSObject()
-        ret.put("value", implementation.pong(args.value ?: "default value :("))
+        ret.put("value", example.pong(args.value ?: "default value :("))
         invoke.resolve(ret)
     }
 
     @Command
     fun getAudioFiles(invoke: Invoke) {
         Log.i(TAG, "Getting audio files...")
-        val result = implementation.getAudioFiles()
+        val result = commands.getAudioFiles()
         invoke.resolve(result)
     }
 
@@ -96,7 +97,7 @@ class ExamplePlugin(private val activity: Activity): Plugin(activity) {
             return
         }
 
-        val result = implementation.openFileReader(contentUri)
+        val result = commands.openFileReader(contentUri)
         Log.d(TAG, "[openFileReader] Result: success=${result.get("success")}, sessionId=${result.get("sessionId")}")
         invoke.resolve(result)
     }
@@ -106,7 +107,7 @@ class ExamplePlugin(private val activity: Activity): Plugin(activity) {
         Log.d(TAG, "[readFile] Command invoked")
         val args = invoke.parseArgs(FileReaderReadArgs::class.java)
         Log.d(TAG, "[readFile] Parsed args - sessionId: ${args.sessionId}, size: ${args.size}")
-        val result = implementation.readFile(args.sessionId, args.size)
+        val result = commands.readFile(args.sessionId, args.size)
         Log.d(TAG, "[readFile] Result: success=${result.get("success")}, bytesRead=${result.get("bytesRead")}")
         invoke.resolve(result)
     }
@@ -116,7 +117,7 @@ class ExamplePlugin(private val activity: Activity): Plugin(activity) {
         Log.d(TAG, "[closeFileReader] Command invoked")
         val args = invoke.parseArgs(FileReaderCloseArgs::class.java)
         Log.d(TAG, "[closeFileReader] Parsed args - sessionId: ${args.sessionId}")
-        val result = implementation.closeFileReader(args.sessionId)
+        val result = commands.closeFileReader(args.sessionId)
         Log.d(TAG, "[closeFileReader] Result: success=${result.get("success")}")
         invoke.resolve(result)
     }
@@ -124,21 +125,21 @@ class ExamplePlugin(private val activity: Activity): Plugin(activity) {
     @Command
     fun seekFile(invoke: Invoke) {
         val args = invoke.parseArgs(FileReaderSeekArgs::class.java)
-        val result = implementation.seekFile(args.sessionId, args.position)
+        val result = commands.seekFile(args.sessionId, args.position)
         invoke.resolve(result)
     }
 
     @Command
     fun readToEnd(invoke: Invoke) {
         val args = invoke.parseArgs(FileReaderReadToEndArgs::class.java)
-        val result = implementation.readToEnd(args.sessionId)
+        val result = commands.readToEnd(args.sessionId)
         invoke.resolve(result)
     }
 
     @Command
     fun getFileReaderInfo(invoke: Invoke) {
         val args = invoke.parseArgs(FileReaderInfoArgs::class.java)
-        val result = implementation.getFileReaderInfo(args.sessionId)
+        val result = commands.getFileReaderInfo(args.sessionId)
         invoke.resolve(result)
     }
 }

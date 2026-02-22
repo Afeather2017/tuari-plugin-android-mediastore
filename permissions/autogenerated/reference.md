@@ -8,6 +8,12 @@ Default permissions for the plugin
 - `allow-read-audio-files`
 - `allow-check-permissions`
 - `allow-request-permissions`
+- `allow-file-reader-open`
+- `allow-file-reader-read`
+- `allow-file-reader-close`
+- `allow-file-reader-seek`
+- `allow-file-reader-read-to-end`
+- `allow-file-reader-info`
 
 ## Permission Table
 
@@ -66,6 +72,162 @@ Enables the check_permissions command without any pre-configured scope.
 <td>
 
 Denies the check_permissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:allow-file-reader-close`
+
+</td>
+<td>
+
+Enables the file_reader_close command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:deny-file-reader-close`
+
+</td>
+<td>
+
+Denies the file_reader_close command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:allow-file-reader-info`
+
+</td>
+<td>
+
+Enables the file_reader_info command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:deny-file-reader-info`
+
+</td>
+<td>
+
+Denies the file_reader_info command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:allow-file-reader-open`
+
+</td>
+<td>
+
+Enables the file_reader_open command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:deny-file-reader-open`
+
+</td>
+<td>
+
+Denies the file_reader_open command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:allow-file-reader-read`
+
+</td>
+<td>
+
+Enables the file_reader_read command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:deny-file-reader-read`
+
+</td>
+<td>
+
+Denies the file_reader_read command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:allow-file-reader-read-to-end`
+
+</td>
+<td>
+
+Enables the file_reader_read_to_end command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:deny-file-reader-read-to-end`
+
+</td>
+<td>
+
+Denies the file_reader_read_to_end command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:allow-file-reader-seek`
+
+</td>
+<td>
+
+Enables the file_reader_seek command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`android-mediastore:deny-file-reader-seek`
+
+</td>
+<td>
+
+Denies the file_reader_seek command without any pre-configured scope.
 
 </td>
 </tr>
