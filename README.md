@@ -13,6 +13,7 @@ A Tauri plugin for accessing Android's MediaStore to query and read audio files 
 - Access file metadata (title, artist, album, duration, content URI, magic bytes)
 - Read file contents with a streaming file reader API
 - Permission handling for Android 12 and below (`READ_EXTERNAL_STORAGE`) and Android 13+ (`READ_MEDIA_AUDIO`)
+- Non-blocking async I/O - all operations run on background threads on Android
 - Async iterator support for streaming file reads
 - Session-based file reading with seek, read chunk, and read-to-end operations
 
