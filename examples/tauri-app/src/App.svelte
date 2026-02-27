@@ -17,9 +17,9 @@
 
 	async function _getAudioFiles() {
 		try {
-			const result = await getAudioFiles()
+			const result = await getAudioFiles({ excludeSuffixes: ['mid', 'midi'] })
 			audioFiles = result.files
-			readerTestResult = `Found ${result.files.length} audio files`
+			readerTestResult = `Found ${result.files.length} audio files (MIDI files excluded)`
 		} catch (e) {
 			readerTestResult = `Error: ${e.message}`
 		}

@@ -30,6 +30,13 @@ pub struct AudioFilesResponse {
   pub files: Vec<AudioFile>,
 }
 
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GetAudioFilesRequest {
+  #[serde(default)]
+  pub exclude_suffixes: Option<Vec<String>>,
+}
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionStatus {

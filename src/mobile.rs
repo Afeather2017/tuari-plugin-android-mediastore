@@ -34,11 +34,11 @@ impl<R: Runtime> AndroidMediastore<R> {
       .map_err(Into::into)
   }
 
-  pub async fn get_audio_files(&self) -> crate::Result<AudioFilesResponse> {
+  pub async fn get_audio_files(&self, payload: GetAudioFilesRequest) -> crate::Result<AudioFilesResponse> {
     self.check_permissions_and_request_if_needed();
     self
       .0
-      .run_mobile_plugin("getAudioFiles", ())
+      .run_mobile_plugin("getAudioFiles", payload)
       .map_err(Into::into)
   }
 
@@ -86,6 +86,7 @@ impl<R: Runtime> AndroidMediastore<R> {
   }
 
   fn check_permissions(&self) -> crate::Result<PermissionStatus> {
+    println!("tuari-plugin-andoird-mediastore: checkPermissions");
     self
       .0
       .run_mobile_plugin("checkPermissions", ())
@@ -93,6 +94,7 @@ impl<R: Runtime> AndroidMediastore<R> {
   }
 
   fn request_permissions(&self, permissions: Option<Vec<String>>) -> crate::Result<PermissionStatus> {
+    println!("tuari-plugin-andoird-mediastore: requestPermissions {:?}", permissions);
     self
       .0
       .run_mobile_plugin(

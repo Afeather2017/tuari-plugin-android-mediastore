@@ -49,6 +49,11 @@ class FileReaderInfoArgs {
   var sessionId: Long = 0
 }
 
+@InvokeArg
+class GetAudioFilesArgs {
+  var excludeSuffixes: List<String>? = null
+}
+
 @TauriPlugin(
     permissions = [
         Permission(
@@ -85,7 +90,8 @@ class MediaStorePlugin(private val activity: Activity): Plugin(activity) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 Log.i(TAG, "Getting audio files...")
-                val result = commands.getAudioFiles()
+                val args = invoke.parseArgs(GetAudioFilesArgs::class.java)
+                val result = commands.getAudioFiles(args.excludeSuffixes)
                 invoke.resolve(result)
             } catch (e: Exception) {
                 invoke.reject(e.message ?: "Unknown error")

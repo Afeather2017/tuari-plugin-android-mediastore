@@ -15,8 +15,9 @@ pub(crate) async fn ping<R: Runtime>(
 #[command]
 pub(crate) async fn get_audio_files<R: Runtime>(
     app: AppHandle<R>,
+    payload: GetAudioFilesRequest,
 ) -> Result<AudioFilesResponse> {
-    app.android_mediastore().get_audio_files().await
+    app.android_mediastore().get_audio_files(payload).await
 }
 
 #[command]

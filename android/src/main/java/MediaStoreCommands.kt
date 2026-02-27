@@ -9,8 +9,8 @@ class MediaStoreCommands(private val activity: Activity) {
     private val mediaStoreHelper = MediaStoreHelper(activity)
     private val TAG = "MediaStoreCommands"
 
-    fun getAudioFiles(): JSObject {
-        val audioFiles = mediaStoreHelper.getAudioFiles()
+    fun getAudioFiles(excludeSuffixes: List<String>?): JSObject {
+        val audioFiles = mediaStoreHelper.getAudioFiles(excludeSuffixes)
         val filesArray = JSArray()
 
         audioFiles.forEach { file ->

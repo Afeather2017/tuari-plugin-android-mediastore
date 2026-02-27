@@ -259,9 +259,25 @@ async function readFileWithSeek(contentUri: string) {
 
 Test plugin connection.
 
-#### `getAudioFiles(): Promise<AudioFilesResponse>`
+#### `getAudioFiles(options?: GetAudioFilesOptions): Promise<AudioFilesResponse>`
 
-Query all audio files from Android's MediaStore.
+Query all audio files from Android's MediaStore. Optionally exclude files by suffix.
+
+**Options:**
+```typescript
+interface GetAudioFilesOptions {
+  excludeSuffixes?: string[];  // e.g., ['mid', 'midi'] to exclude MIDI files
+}
+```
+
+**Example:**
+```typescript
+// Get all audio files
+await getAudioFiles();
+
+// Exclude MIDI files
+await getAudioFiles({ excludeSuffixes: ['mid', 'midi'] });
+```
 
 **Response:**
 ```typescript
@@ -362,6 +378,15 @@ cd examples/tauri-app
 npm install
 npm run tauri android dev
 ```
+
+## Development
+
+When modifying the plugin during development:
+
+1. **Rust/Kotlin changes**: Standard rebuild, changes apply immediately
+2. **TypeScript API changes (`guest-js/`)**: Must run `pnpm build` from the plugin root to rebuild the bundled JS distribution
+
+> **⚠️ Important**: After modifying any files in `guest-js/`, always run `pnpm build` to update the `dist-js/` bundle. The example app imports from these pre-built files, so changes won't be reflected until the bundle is rebuilt.
 
 ## Platform Support
 

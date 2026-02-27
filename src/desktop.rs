@@ -20,7 +20,7 @@ impl<R: Runtime> AndroidMediastore<R> {
     })
   }
 
-  pub async fn get_audio_files(&self) -> crate::Result<AudioFilesResponse> {
+  pub async fn get_audio_files(&self, _payload: GetAudioFilesRequest) -> crate::Result<AudioFilesResponse> {
     // Desktop stub implementation - returns empty list
     Ok(AudioFilesResponse {
       files: vec![],

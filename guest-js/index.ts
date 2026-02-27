@@ -22,8 +22,22 @@ export interface AudioFilesResponse {
   files: AudioFile[];
 }
 
-export async function getAudioFiles(): Promise<AudioFilesResponse> {
-  return await invoke<AudioFilesResponse>('plugin:android-mediastore|get_audio_files');
+export interface GetAudioFilesOptions {
+  excludeSuffixes?: string[];
+}
+
+export async function getAudioFiles(options?: GetAudioFilesOptions): Promise<AudioFilesResponse> {
+  console.log('[getAudioFiles] Called with options:', options);
+  try {
+    const result = await invoke<AudioFilesResponse>('plugin:android-mediastore|get_audio_files', {
+      payload: options || {},
+    });
+    console.log('[getAudioFiles] Success, files count:', result.files.length);
+    return result;
+  } catch (e) {
+    console.error('[getAudioFiles] Error:', e);
+    throw e;
+  }
 }
 
 // File reader types and API
@@ -140,19 +154,25 @@ export class MediaFileReader {
    */
   async open(): Promise<void> {
     if (this._isOpen) {
+      console.error('[MediaFileReader.open] Already open');
       throw new Error('File reader is already open');
     }
 
+    console.log('[MediaFileReader.open] Opening file:', this.contentUri);
     try {
       const result = await fileReaderOpen(this.contentUri);
+      console.log('[MediaFileReader.open] Result:', result);
 
       if (!result.success) {
+        console.error('[MediaFileReader.open] Failed to open:', result.error);
         throw new Error(result.error || 'Failed to open file reader');
       }
 
       this.sessionId = result.sessionId;
       this._isOpen = true;
+      console.log('[MediaFileReader.open] Session opened, ID:', this.sessionId);
     } catch (e) {
+      console.error('[MediaFileReader.open] Exception:', e);
       if (e instanceof Error) {
         throw e;
       }
@@ -167,12 +187,17 @@ export class MediaFileReader {
    */
   async read(size: number = 8192): Promise<FileReaderReadResponse> {
     if (!this._isOpen || this.sessionId === undefined) {
+      console.error('[MediaFileReader.read] Not open, sessionId:', this.sessionId);
       throw new Error('File reader is not open');
     }
 
+    console.log('[MediaFileReader.read] Reading', size, 'bytes from session', this.sessionId);
     try {
-      return await fileReaderRead(this.sessionId, size);
+      const result = await fileReaderRead(this.sessionId, size);
+      console.log('[MediaFileReader.read] Result:', result.success, 'bytes:', result.bytesRead, 'eof:', result.isEof);
+      return result;
     } catch (e) {
+      console.error('[MediaFileReader.read] Exception:', e);
       if (e instanceof Error) {
         throw e;
       }
@@ -186,14 +211,18 @@ export class MediaFileReader {
    */
   async seek(position: number): Promise<void> {
     if (!this._isOpen || this.sessionId === undefined) {
+      console.error('[MediaFileReader.seek] Not open');
       throw new Error('File reader is not open');
     }
 
+    console.log('[MediaFileReader.seek] Seeking to', position, 'in session', this.sessionId);
     const result = await fileReaderSeek(this.sessionId, position);
 
     if (!result.success) {
+      console.error('[MediaFileReader.seek] Failed:', result.error);
       throw new Error(result.error || 'Failed to seek');
     }
+    console.log('[MediaFileReader.seek] Success, new position:', result.newPosition);
   }
 
   /**
@@ -201,10 +230,14 @@ export class MediaFileReader {
    */
   async readToEnd(): Promise<FileReaderReadToEndResponse> {
     if (!this._isOpen || this.sessionId === undefined) {
+      console.error('[MediaFileReader.readToEnd] Not open');
       throw new Error('File reader is not open');
     }
 
-    return await fileReaderReadToEnd(this.sessionId);
+    console.log('[MediaFileReader.readToEnd] Reading to end from session', this.sessionId);
+    const result = await fileReaderReadToEnd(this.sessionId);
+    console.log('[MediaFileReader.readToEnd] Result:', result.success, 'bytes:', result.bytesRead);
+    return result;
   }
 
   /**
@@ -212,10 +245,13 @@ export class MediaFileReader {
    */
   async getInfo(): Promise<SessionInfo | null> {
     if (!this._isOpen || this.sessionId === undefined) {
+      console.error('[MediaFileReader.getInfo] Not open');
       throw new Error('File reader is not open');
     }
 
+    console.log('[MediaFileReader.getInfo] Getting info for session', this.sessionId);
     const result = await fileReaderInfo(this.sessionId);
+    console.log('[MediaFileReader.getInfo] Result:', result.info);
     return result.info || null;
   }
 
@@ -224,12 +260,15 @@ export class MediaFileReader {
    */
   async close(): Promise<void> {
     if (!this._isOpen || this.sessionId === undefined) {
+      console.log('[MediaFileReader.close] Already closed or not open');
       return;
     }
 
+    console.log('[MediaFileReader.close] Closing session', this.sessionId);
     await fileReaderClose(this.sessionId);
     this._isOpen = false;
     this.sessionId = undefined;
+    console.log('[MediaFileReader.close] Closed');
   }
 
   /**
@@ -264,37 +303,45 @@ export class MediaFileReader {
    */
   async *[Symbol.asyncIterator](): AsyncIterator<Uint8Array> {
     if (!this._isOpen) {
+      console.error('[MediaFileReader.asyncIterator] Not open');
       throw new Error('File reader is not open. Call open() first.');
     }
 
+    console.log('[MediaFileReader.asyncIterator] Starting iteration');
     try {
       while (true) {
         const result = await this.read();
 
         if (result.error || !result.success) {
           if (result.error) {
+            console.error('[MediaFileReader.asyncIterator] Error during iteration:', result.error);
             throw new Error(result.error);
           }
           break;
         }
 
         if (!result.data) {
+          console.log('[MediaFileReader.asyncIterator] No more data');
           break;
         }
 
         const bytes = base64ToUint8Array(result.data);
 
         if (bytes.length === 0) {
+          console.log('[MediaFileReader.asyncIterator] Empty chunk, stopping');
           break;
         }
 
+        console.log('[MediaFileReader.asyncIterator] Yielding', bytes.length, 'bytes');
         yield bytes;
 
         if (result.isEof) {
+          console.log('[MediaFileReader.asyncIterator] EOF reached');
           break;
         }
       }
     } catch (e) {
+      console.error('[MediaFileReader.asyncIterator] Exception:', e);
       // Re-throw the error
       throw e;
     }
@@ -304,6 +351,7 @@ export class MediaFileReader {
    * Helper method to read the entire file as a single Uint8Array.
    */
   async readAll(): Promise<Uint8Array> {
+    console.log('[MediaFileReader.readAll] Starting readAll');
     await this.open();
 
     try {
@@ -312,6 +360,8 @@ export class MediaFileReader {
       for await (const chunk of this) {
         chunks.push(chunk);
       }
+
+      console.log('[MediaFileReader.readAll] Read', chunks.length, 'chunks');
 
       // Combine all chunks into a single Uint8Array
       const totalLength = chunks.reduce((sum, chunk) => sum + chunk.length, 0);
@@ -323,6 +373,7 @@ export class MediaFileReader {
         offset += chunk.length;
       }
 
+      console.log('[MediaFileReader.readAll] Total bytes:', totalLength);
       return result;
     } finally {
       await this.close();

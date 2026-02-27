@@ -58,7 +58,7 @@ class MediaStoreHelper(private val context: Context) {
         private val sessionIdCounter = AtomicLong(0)
     }
 
-    fun getAudioFiles(): List<AudioFileData> {
+    fun getAudioFiles(excludeSuffixes: List<String>?): List<AudioFileData> {
         val audioFiles = mutableListOf<AudioFileData>()
 
         val projection = arrayOf(
@@ -66,11 +66,19 @@ class MediaStoreHelper(private val context: Context) {
             MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.ALBUM,
-            MediaStore.Audio.Media.DURATION
+            MediaStore.Audio.Media.DURATION,
+            MediaStore.Audio.Media.DATA  // File path for suffix filtering
         )
 
-        val selection = "${MediaStore.Audio.Media.IS_MUSIC} = ?"
-        val selectionArgs = arrayOf("1")
+        var selection = "${MediaStore.Audio.Media.IS_MUSIC} = ?"
+        var selectionArgs = mutableListOf("1")
+
+        // Add suffix exclusions using DATA column
+        excludeSuffixes?.forEach { suffix ->
+            val normalizedSuffix = if (suffix.startsWith(".")) suffix else ".$suffix"
+            selection += " AND ${MediaStore.Audio.Media.DATA} NOT LIKE ?"
+            selectionArgs.add("%$normalizedSuffix")
+        }
 
         val sortOrder = "${MediaStore.Audio.Media.TITLE} ASC"
 
@@ -79,7 +87,7 @@ class MediaStoreHelper(private val context: Context) {
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 projection,
                 selection,
-                selectionArgs,
+                selectionArgs.toTypedArray(),
                 sortOrder
             )
 
