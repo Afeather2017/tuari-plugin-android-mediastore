@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediaStore Demo</title>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Android MediaStore Audio Files</h1>
+      <button id="list-files-btn" type="button">List Music Files</button>
+      <p id="status" class="status"></p>
+
+      <section>
+        <h2>Music Files</h2>
+        <ul id="file-list" class="file-list"></ul>
+      </section>
+
+      <section>
+        <h2>Selected File Info</h2>
+        <pre id="details" class="details">Select a music file to view metadata and read diagnostics.</pre>
+      </section>
+    </main>
+  </body>
+</html>
