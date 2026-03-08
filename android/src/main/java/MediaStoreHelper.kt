@@ -17,7 +17,8 @@ data class AudioFileData(
     val album: String,
     val duration: Long,
     val contentUri: String,
-    val firstFourBytes: String?
+    val firstFourBytes: String?,
+    val size: Long?
 )
 
 data class FileReaderSession(
@@ -67,6 +68,7 @@ class MediaStoreHelper(private val context: Context) {
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.ALBUM,
             MediaStore.Audio.Media.DURATION,
+            MediaStore.Audio.Media.SIZE,
             MediaStore.Audio.Media.DATA  // File path for suffix filtering
         )
 
@@ -97,6 +99,7 @@ class MediaStoreHelper(private val context: Context) {
                 val artistColumn = it.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
                 val albumColumn = it.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)
                 val durationColumn = it.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
+                val sizeColumn = it.getColumnIndex(MediaStore.Audio.Media.SIZE)
 
                 while (it.moveToNext()) {
                     val id = it.getLong(idColumn)
@@ -104,10 +107,11 @@ class MediaStoreHelper(private val context: Context) {
                     val artist = it.getString(artistColumn) ?: "Unknown Artist"
                     val album = it.getString(albumColumn) ?: "Unknown Album"
                     val duration = it.getLong(durationColumn)
+                    val size = if (sizeColumn >= 0) it.getLong(sizeColumn) else null
                     val contentUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id).toString()
                     val firstFourBytes = readFirstFourBytes(contentUri)
 
-                    audioFiles.add(AudioFileData(id, title, artist, album, duration, contentUri, firstFourBytes))
+                    audioFiles.add(AudioFileData(id, title, artist, album, duration, contentUri, firstFourBytes, size))
                 }
             }
 

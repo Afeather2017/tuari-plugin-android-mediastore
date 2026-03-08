@@ -29,7 +29,7 @@ echo
 # Step 1: Build unsigned APK
 echo "[1/4] Building APK with Tauri..."
 cd "$FRONTEND_DIR"
-npx tauri android build
+npx tauri android build --target aarch64
 
 # Step 2: Generate keystore if needed
 echo

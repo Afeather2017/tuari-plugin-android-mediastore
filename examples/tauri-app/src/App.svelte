@@ -7,6 +7,13 @@
 	let selectedFile = $state(null)
 	let readerTestResult = $state('')
 
+	function formatBytes(bytes) {
+		if (!bytes) return 'N/A'
+		if (bytes < 1024) return bytes + ' B'
+		if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB'
+		return (bytes / (1024 * 1024)).toFixed(2) + ' MB'
+	}
+
 	function updateResponse(returnValue) {
 		response += `[${new Date().toLocaleTimeString()}] ` + (typeof returnValue === 'string' ? returnValue : JSON.stringify(returnValue)) + '<br>'
 	}
@@ -120,6 +127,7 @@
           <div class="file-title">{file.title}</div>
           <div class="file-info">{file.artist} - {file.album}</div>
           <div class="file-magic">Magic: {file.firstFourBytes || 'N/A'}</div>
+          <div class="file-size">Size: {formatBytes(file.size)}</div>
         </div>
       {/each}
     </div>
@@ -175,6 +183,11 @@
     font-size: 0.8em;
     font-family: monospace;
     color: #006600;
+  }
+
+  .file-size {
+    font-size: 0.8em;
+    color: #666;
   }
 
   .test-result {

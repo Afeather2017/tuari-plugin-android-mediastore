@@ -22,6 +22,7 @@ pub struct AudioFile {
   pub duration: i64,
   pub content_uri: String,
   pub first_four_bytes: Option<String>,
+  pub size: Option<i64>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

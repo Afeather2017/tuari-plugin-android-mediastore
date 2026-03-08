@@ -16,6 +16,7 @@ export interface AudioFile {
   duration: number;
   contentUri: string;
   firstFourBytes?: string;
+  size?: number;
 }
 
 export interface AudioFilesResponse {

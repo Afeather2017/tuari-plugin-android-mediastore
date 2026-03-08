@@ -22,6 +22,7 @@ class MediaStoreCommands(private val activity: Activity) {
             fileObj.put("duration", file.duration)
             fileObj.put("contentUri", file.contentUri)
             fileObj.put("firstFourBytes", file.firstFourBytes)
+            fileObj.put("size", file.size)
             filesArray.put(fileObj)
         }
 
